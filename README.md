@@ -1,7 +1,3 @@
-Hi this is molham.
-
-This project was bootstrapped with [Create React 
-App](https://github.com/facebook/create-react-app).
 
 This project contains an example project board meant to showcase how one can be used. The issues posted to it are not real issues.
 
@@ -82,4 +78,3 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-you know, the day to day stuff
