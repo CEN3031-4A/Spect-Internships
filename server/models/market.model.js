@@ -6,17 +6,11 @@ var mongoose = require('mongoose'),
      See https://mongoosejs.com/docs/guide.html for examples for creating schemas
      See also https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
   */
-var InternshipSchema = new Schema({
+var MarketSchema = new Schema({
   /* Your code for a schema here */ 
-  title: {type: String, required: true},
-  description: {type: String, required: true},
-  requirements: {type: String, required: true},
-  company: {type: Schema.ObjectId, required: false},
-  market: {type: Schema.ObjectId, required: false},
-  compensation: {type: Boolean, required: true},
-  published: {type: Boolean, required: true},
-  removed: {type: Boolean, required: true},
-  applicationLink: {type: String, required: true},
+  name: {type: String, required: true},
+  published: {type: Boolean, required: true, default: false},
+  removed: {type: Boolean, required: true, default: false},
   updated_at: Date,
   created_at: Date
 });
@@ -24,7 +18,7 @@ var InternshipSchema = new Schema({
 /* Create a 'pre' function that adds the updated_at (and created_at if not already there) property 
    See https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
 */
-InternshipSchema.pre('save', function(next) {
+MarketSchema.pre('save', function(next) {
   var date = new Date();
   this.updated_at = date;
   if(!this.created_at){
@@ -35,7 +29,7 @@ InternshipSchema.pre('save', function(next) {
 
 /* Use your schema to instantiate a Mongoose model */
 //Check out - https://mongoosejs.com/docs/guide.html#models
-var Internship = mongoose.model('Internship', InternshipSchema);
+var Market = mongoose.model('Market', MarketSchema);
 
 /* Export the model to make it avaiable to other parts of your Node application */
-module.exports = Internship;
+module.exports = Market;
