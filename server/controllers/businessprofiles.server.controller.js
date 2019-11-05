@@ -1,4 +1,4 @@
-const Business_Profile = require('../models/businessprofile.model.js');
+const Business_Profile = require('../models/businessprofiles.server.model.js');
 
 exports.update = function(req, res) {
     Business_Profile.findOneAndUpdate({_id: req.params.id}, req.body, function(err, result){
