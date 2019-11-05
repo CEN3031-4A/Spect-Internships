@@ -31,7 +31,8 @@ exports.add = function(req, res) {
         name: req.body.name,
         address: req.body.address,
         description: req.body.description,
-        business_link: req.body.business_link,
+        website: req.body.website,
+        useraccount: req.body.useraccount,
         removed: false          
     });
 

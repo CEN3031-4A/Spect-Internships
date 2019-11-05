@@ -9,9 +9,10 @@ var mongoose = require('mongoose'),
 var Business_ProfileSchema = new Schema({
   /* Your code for a schema here */ 
   name: {type: String, required: true},
-  address: {type: String, required: true},
-  description: {type: String, required: true},
-  business_link: {type: String, required: true},
+  address: {type: String, required: false},
+  description: {type: String, required: false},
+  website: {type: String, required: false},
+  useraccount: {type: Schema.ObjectId, required: true},
   updated_at: Date,
   created_at: Date
 });
@@ -30,7 +31,7 @@ Business_ProfileSchema.pre('save', function(next) {
 
 /* Use your schema to instantiate a Mongoose model */
 //Check out - https://mongoosejs.com/docs/guide.html#models
-var Business_Profile = mongoose.model('Market', Business_ProfileSchema);
+var Business_Profile = mongoose.model('Business Profile', Business_ProfileSchema);
 
 /* Export the model to make it avaiable to other parts of your Node application */
 module.exports = Business_Profile;
