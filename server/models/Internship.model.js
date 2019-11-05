@@ -14,7 +14,7 @@ var InternshipSchema = new Schema({
   company: {type: Schema.ObjectId, required: false},
   market: {type: Schema.ObjectId, required: false},
   compensation: {type: Boolean, required: true},
-  published: {type: Boolean, required: true},
+  published: {type: Boolean, required: true, default: true},
   removed: {type: Boolean, required: true},
   applicationLink: {type: String, required: true},
   updated_at: Date,
