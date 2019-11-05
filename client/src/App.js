@@ -1,23 +1,41 @@
-import React from 'react';
-import { Route, Switch, Redirect  } from 'react-router-dom';
-import Home from "./views/Home/Home"
-import NotFound from "./views/NotFound"
-import Header from "./components/Header/Header"
+import React, { Fragment, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import Landing from './components/layout/Landing';
+import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
+import Alert from './components/layout/Alert';
 
-const App = () => {
-  return (
-    <div>
-      <Header />
-      <Switch>
-        <Route exact path="/Home" component={Home} />
-        <Route exact path="/">
-          <Redirect to="/Home" />
-        </Route>
-        <Route component={NotFound}/>
-      </Switch>
-    </div>
-  );
+import { Provider } from 'react-redux';
+import store from './store';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
+import './App.css';
+
+if (localStorage.token) {
+	setAuthToken(localStorage.token);
+}
+
+function App() {
+	useEffect(() => {
+		store.dispatch(loadUser());
+	}, []);
+
+	return (
+		<Provider store={store}>
+			<Router>
+				<Fragment>
+					<Route exact path="/" component={Landing} />
+
+					<Alert />
+					<Switch>
+						<Route exact path="/signup" component={SignUp} />
+						<Route exact path="/login" component={Login} />
+					</Switch>
+				</Fragment>
+			</Router>
+		</Provider>
+	);
 }
 
 export default App;
