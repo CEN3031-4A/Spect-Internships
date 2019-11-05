@@ -32,6 +32,7 @@ exports.add = function(req, res) {
         address: req.body.address,
         description: req.body.description,
         website: req.body.website,
+        email: req.body.email,
         useraccount: req.body.useraccount,
         removed: false          
     });

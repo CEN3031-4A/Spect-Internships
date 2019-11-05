@@ -12,6 +12,7 @@ var Business_ProfileSchema = new Schema({
   address: {type: String, required: false},
   description: {type: String, required: false},
   website: {type: String, required: false},
+  email: {type: String, required: false},
   useraccount: {type: Schema.ObjectId, required: true},
   updated_at: Date,
   created_at: Date
