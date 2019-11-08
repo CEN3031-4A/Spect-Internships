@@ -26,7 +26,7 @@ module.exports.init = () => {
     app.use(bodyParser.json());
 
     // add a router
-    app.use('/api/example', studentProfileRouter);
+    app.use('/api/studentProfile', studentProfileRouter);
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files
