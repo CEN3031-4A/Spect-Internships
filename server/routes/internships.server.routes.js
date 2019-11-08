@@ -3,10 +3,16 @@ const internshipController = require('../controllers/internships.server.controll
     router = express.Router()
 
 router.route('/')
-  .get(internshipController.list)
+  .get(internshipController.list);
+
+router.route('/:id')
+  .get(internshipController.findOne)
   .post(internshipController.add);
 
-router.route("/update/:id")
+router.route('/:id/delete')
+  .delete(internshipController.delete);
+
+router.route("/:id/update")
   .put(internshipController.update);
   
 module.exports = router;

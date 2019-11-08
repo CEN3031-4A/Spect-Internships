@@ -6,7 +6,18 @@ exports.update = function(req, res) {
                 console.error("Error");
                 res.status(500).send({ message: "Error Adding Internship"});
             }else{
-                console.log(JSON.stringify(result));
+                res.send(result);
+            }
+        }
+    );
+};
+
+exports.findOne = function(req, res) {
+    Internship.findById(req.params.id, function(err, result){
+            if(err){
+                console.error("Error");
+                res.status(500).send({ message: "Error Adding Internship"});
+            }else{
                 res.send(result);
             }
         }
@@ -19,7 +30,6 @@ exports.list = function(req, res) {
                 console.error("Error");
                 res.status(500).send({ message: "Error loading Internships"});
             }else{
-                console.log("Result" + JSON.stringify(results));
                 res.send(results);
             }
         }
@@ -32,6 +42,8 @@ exports.add = function(req, res) {
         description: req.body.description,
         requirements: req.body.requirements,
         compensation: req.body.compensation,
+        duration: req.body.duration,
+        industry: req.body.industry,
         market: req.body.market,
         published: req.body.published,
         removed: false,
@@ -46,4 +58,16 @@ exports.add = function(req, res) {
             res.send({ message: "Success", result });
         }
     });
+}
+
+exports.delete = function(req, res) {
+    Internship.findOneAndDelete({ _id: req.params.id }, function(err, results){
+        if(err){    
+            console.error(err);
+            res.status(500).send({ message: "Error Deleting Internship"});
+        }else{
+            res.send({ message: "Success", results });
+        }
+    })
+    
 }

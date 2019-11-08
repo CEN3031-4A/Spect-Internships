@@ -2,6 +2,7 @@ const path = require('path'),
     express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
+    cors = require('cors');
     bodyParser = require('body-parser'),
     internshipRouter = require('../routes/internships.server.routes');
     marketRouter = require('../routes/markets.server.routes');
@@ -26,6 +27,10 @@ module.exports.init = () => {
 
     // body parsing middleware
     app.use(bodyParser.json());
+
+    //Disables Coors
+    // TO-DO REMOVE IN PRODUCTION
+    app.use(cors());
 
     // add a router
     app.use('/api/Internship', internshipRouter);
