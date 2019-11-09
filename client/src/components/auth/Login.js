@@ -21,14 +21,12 @@ const Login = ({ login, isAuthenticated }) => {
 	}
 	return (
 		<Fragment>
-			<div className="auth-section container">
-				<div className="form-center">
-					<h1 className="large text-primary">Log In</h1>
-					<p className="lead">
-						<i className="fas fa-user" /> Log Into Your Account
-					</p>
-					<form className="form" onSubmit={(e) => onSubmit(e)}>
-						<div className="form-group">
+			<div className="login-section">
+			<div className="login-page">
+				<div className="form">
+					
+					<form className="login-form" onSubmit={(e) => onSubmit(e)}>
+						
 							<input
 								type="email"
 								placeholder="Email Address"
@@ -37,8 +35,8 @@ const Login = ({ login, isAuthenticated }) => {
 								onChange={(e) => onChange(e)}
 								required
 							/>
-						</div>
-						<div className="form-group">
+						
+						
 							<input
 								type="password"
 								placeholder="Password"
@@ -48,17 +46,18 @@ const Login = ({ login, isAuthenticated }) => {
 								onChange={(e) => onChange(e)}
 								required
 							/>
-						</div>
-						<div className="btn-center">
+						
+						
 							<button className="btn btn-primary uppercase">
-								LOG IN <i className="fas fa-chevron-right icon-padding" />
+								LOG IN 
 							</button>
-						</div>
+						
 					</form>
-					<p className="my-1">
+					<p className="message">
 						Don't have an account? <Link to="/signup">Create Account </Link>
 					</p>
 				</div>
+			</div>
 			</div>
 		</Fragment>
 	);

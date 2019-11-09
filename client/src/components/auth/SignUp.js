@@ -28,14 +28,12 @@ const SignUp = ({ setAlert, signup, isAuthenticated }) => {
 	}
 	return (
 		<Fragment>
-			<div className="container">
-				<div className="form-center">
-					<h1 className="large text-primary">Sign Up</h1>
-					<p className="lead">
-						<i className="fas fa-user-plus" /> Create Your Account
-					</p>
-					<form className="form" onSubmit={(e) => onSubmit(e)}>
-						<div className="form-group">
+			<div className="login-section">
+			<div className="login-page">
+				<div className="form">
+					
+					<form  onSubmit={(e) => onSubmit(e)}>
+						
 							<input
 								type="text"
 								placeholder="Name"
@@ -44,8 +42,8 @@ const SignUp = ({ setAlert, signup, isAuthenticated }) => {
 								onChange={(e) => onChange(e)}
 								required
 							/>
-						</div>
-						<div className="form-group">
+						
+						
 							<input
 								type="email"
 								placeholder="Email Address"
@@ -54,9 +52,9 @@ const SignUp = ({ setAlert, signup, isAuthenticated }) => {
 								onChange={(e) => onChange(e)}
 								required
 							/>
-							<small className="form-text">This website uses Gravatars</small>
-						</div>
-						<div className="form-group">
+							
+						
+						
 							<input
 								type="password"
 								placeholder="Password"
@@ -66,8 +64,8 @@ const SignUp = ({ setAlert, signup, isAuthenticated }) => {
 								onChange={(e) => onChange(e)}
 								required
 							/>
-						</div>
-						<div className="form-group">
+						
+						
 							<input
 								type="password"
 								placeholder="Confirm Password"
@@ -77,17 +75,18 @@ const SignUp = ({ setAlert, signup, isAuthenticated }) => {
 								onChange={(e) => onChange(e)}
 								required
 							/>
-						</div>
-						<div className="btn-center">
-							<button className="btn btn-primary uppercase ">
-								SIGN UP <i className="fas fa-chevron-right icon-padding" />
+						
+						
+							<button className="btn">
+								Register
 							</button>
-						</div>
-					</form>
-					<p className="my-1">
-						Already have an account? <Link to="/login">Sign In</Link>
+							<p className="message">
+						Registered already? <Link to="/login"> Login</Link>
 					</p>
+					</form>
+					
 				</div>
+			</div>
 			</div>
 		</Fragment>
 	);
