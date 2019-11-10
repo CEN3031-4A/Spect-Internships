@@ -3,10 +3,12 @@ const studentProfileController = require('../controllers/studentProfile.server.c
     router = express.Router()
 
 router.route('/')
-  .get(studentProfileController.list)
+  .get(studentProfileController.list);
+  router.route('/:id')
+  .get(studentProfileController.findOne)
   .post(studentProfileController.add);
   
-  router.route("/update/:id")
+  router.route('/:id/update')
     .put(studentProfileController.update);
   
   module.exports = router; 
