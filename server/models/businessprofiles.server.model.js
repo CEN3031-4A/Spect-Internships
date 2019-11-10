@@ -13,7 +13,7 @@ var Business_ProfileSchema = new Schema({
   description: {type: String, required: false},
   website: {type: String, required: false},
   email: {type: String, required: false},
-  useraccount: {type: Schema.ObjectId, required: true},
+  useraccount: {type: Schema.ObjectId, required: false},
   updated_at: Date,
   created_at: Date
 });

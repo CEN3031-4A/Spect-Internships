@@ -5,8 +5,9 @@ const businessProfileRouter = require('../controllers/businessprofiles.server.co
 router.route('/')
   .get(businessProfileRouter.list)
   .post(businessProfileRouter.add);
-  
-  router.route("/update/:id")
-    .put(businessProfileRouter.update);
-  
+
+router.route('/:id')
+  .get(businessProfileRouter.findOne)
+  .put(businessProfileRouter.update);
+
   module.exports = router; 

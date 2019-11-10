@@ -6,7 +6,18 @@ exports.update = function(req, res) {
                 console.error("Error");
                 res.status(500).send({ message: "Error Adding Business Profile"});
             }else{
-                console.log(JSON.stringify(result));
+                res.send(result);
+            }
+        }
+    );
+};
+
+exports.findOne = function(req, res) {
+    Business_Profile.findById(req.params.id, function(err, result){
+            if(err){
+                console.error("Error");
+                res.status(500).send({ message: "Error Adding Business Profile"});
+            }else{
                 res.send(result);
             }
         }
@@ -19,7 +30,6 @@ exports.list = function(req, res) {
                 console.error("Error");
                 res.status(500).send({ message: "Error loading Business Profiles"});
             }else{
-                console.log("Result" + JSON.stringify(results));
                 res.send(results);
             }
         }
