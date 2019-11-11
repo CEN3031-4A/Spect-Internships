@@ -3,8 +3,11 @@ const express = require('express');
 const connectMongoose = require('./config/db.js');
 const app = express();
 const path = require('path');
+const cors = require('cors');
 
 
+app.use(cors());
+app.options('*', cors());
 app.use(express.json({ extended: false }));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
@@ -20,7 +23,7 @@ if (process.env.NODE_ENV === 'production' || true) {
 }
 
 // Use env port or default
-const port = process.env.PORT || 5002;
+const port = process.env.PORT || 5000;
 
 // const app = express.init();
 
