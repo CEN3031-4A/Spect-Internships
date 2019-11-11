@@ -15,12 +15,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/UFWebApps/React_Template_Repo.git"
+    "url": "git+https://github.com/UFWebApps/React_Template_Repo.git"
   },
   "keywords": [],
   "author": "Dakota Rennemann",
   "license": "MIT",
   "dependencies": {
+     "body-parser": "^1.19.0",
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
@@ -36,5 +37,8 @@
     "should": "^13.2.3",
     "supertest": "^4.0.2"
   },
-  "homepage": "https://github.com/UFWebApps/React_Template_Repo#readme"
+    "homepage": "https://github.com/UFWebApps/React_Template_Repo#readme",
+  "bugs": {
+    "url": "https://github.com/UFWebApps/React_Template_Repo/issues"
+  }
 }
