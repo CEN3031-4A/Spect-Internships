@@ -3,6 +3,9 @@ import { Route, Switch, Redirect  } from 'react-router-dom';
 import Home from "./views/Home/Home"
 import NotFound from "./views/NotFound"
 import Header from "./components/Header/Header"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import updateStudentProfile from './views/updateStudentProfile';
 
 
 const App = () => {
@@ -14,6 +17,8 @@ const App = () => {
         <Route exact path="/">
           <Redirect to="/Home" />
         </Route>
+        <Route exact path="/studentProfile/add" component={updateStudentProfile}/>
+        <Route exact path="/studentProfile/edit/:id" component={updateStudentProfile}/>
         <Route component={NotFound}/>
       </Switch>
     </div>
