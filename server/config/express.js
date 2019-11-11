@@ -2,11 +2,9 @@ const path = require('path'),
     express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
-    cors = require('cors'),
     bodyParser = require('body-parser'),
-    businessProfileRouter = require('../routes/businessProfiles.server.routes');
+    cors = require('cors'),
     studentProfileRouter = require('../routes/studentProfile.server.routes');
-
 
 module.exports.init = () => {
     /* 
@@ -14,8 +12,7 @@ module.exports.init = () => {
         - reference README for db uri
     */
     mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
+        useNewUrlParser: true
     });
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
@@ -29,11 +26,9 @@ module.exports.init = () => {
     // body parsing middleware
     app.use(bodyParser.json());
 
-
     app.use(cors());
 
-    // add a router'
-   app.use('/api/businessProfile', businessProfileRouter);
+    // add a router
     app.use('/api/studentProfile', studentProfileRouter);
 
     if (process.env.NODE_ENV === 'production') {
