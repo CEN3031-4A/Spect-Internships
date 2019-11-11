@@ -3,6 +3,7 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
+    cors = require('cors'),
     studentProfileRouter = require('../routes/studentProfile.server.routes');
 
 module.exports.init = () => {
@@ -24,6 +25,8 @@ module.exports.init = () => {
 
     // body parsing middleware
     app.use(bodyParser.json());
+
+    app.use(cors());
 
     // add a router
     app.use('/api/studentProfile', studentProfileRouter);

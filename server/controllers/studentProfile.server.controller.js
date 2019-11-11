@@ -14,6 +14,18 @@ exports.update = function(req, res){
 );
 };
 
+exports.findOne = function(req, res) {
+    Student.findById(req.params.id, function(err, result){
+            if(err){
+                console.error("Error");
+                res.status(500).send({ message: "Error Adding Student Profile"});
+            }else{
+                res.send(result);
+            }
+        }
+    );
+};
+
 exports.list = function(req,res){
     Student.find().exec(function(err,results){
         if(err){
@@ -34,6 +46,7 @@ exports.add = function(req, res){
         address: req.body.address,
         userAccount: req.body.userAccount,
         email: req.body.email,
+        description: req.body.description,
         removed: false
     });
 
