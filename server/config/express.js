@@ -20,7 +20,8 @@ module.exports.init = () => {
     mongoose.set('useFindAndModify', false);
 
     // initialize app
-    const app = express();
+    //const app = express();
+    let app = express();
 
     // enable request logging for development debugging
     app.use(morgan('dev'));
@@ -31,6 +32,7 @@ module.exports.init = () => {
     //Disables Coors
     // TO-DO REMOVE IN PRODUCTION
     app.use(cors());
+    app.options('*', cors());
 
     // add a router
     app.use('/api/Internship', internshipRouter);

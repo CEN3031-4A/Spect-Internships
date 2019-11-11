@@ -6,6 +6,7 @@ import Header from "./components/Header/Header"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import EditListing from './views/EditListing';
+import ViewListing from './views/ViewListing';
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
         </Route>
         <Route exact path="/listing/add" component={EditListing}/>
         <Route exact path="/listing/edit/:id" component={EditListing}/>
+        <Route exact path="/listing/view/:id" component={ViewListing}/>
         <Route component={NotFound}/>
       </Switch>
     </div>
