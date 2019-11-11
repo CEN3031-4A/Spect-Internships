@@ -6,6 +6,8 @@ import Header from "./components/Header/Header"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import EditListing from './views/EditListing';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App = () => {
@@ -21,6 +23,17 @@ const App = () => {
         <Route exact path="/listing/edit/:id" component={EditListing}/>
         <Route component={NotFound}/>
       </Switch>
+      <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+          />
     </div>
   );
 }

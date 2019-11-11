@@ -2,7 +2,10 @@ import React from 'react';
 import axios from 'axios';
 
 import config from '../config';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
+import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 
 
@@ -98,13 +101,28 @@ class EditListing extends React.Component{
 
     deleteListing(){
         if(this.state.edit){
-            axios.delete(config.apiURL + "Internship/" + this.state.edit + "/delete").then(results => {
-                console.log("Successfully deleted.");
-                // TO-DO: REDIRECT TO MY LISTINGS PAGE & SUCCESS TOAST
-            }).catch(erro => {
-                console.log("Error Deleting");
-                // TO-DO: Popup Error Toast
-            });
+            confirmAlert({
+                title: 'Delete Internship Listing',
+                message: 'Are you sure to do this? This cannot be undone.',
+                buttons: [
+                  {
+                    label: 'Yes',
+                    onClick: () => {
+                        axios.delete(config.apiURL + "Internship/" + this.state.edit + "/delete").then(results => {
+                            console.log("Successfully deleted.");
+                            // TO-DO: REDIRECT TO MY LISTINGS PAGE & SUCCESS TOAST
+                        }).catch(erro => {
+                            console.log("Error Deleting");
+                            // TO-DO: Popup Error Toast
+                        });
+                    }
+                  },
+                  {
+                    label: 'No',
+                    onClick: () => {}
+                  }
+                ]
+              });
         }else{
             console.error("Can't delete until created.");
         }
@@ -128,14 +146,18 @@ class EditListing extends React.Component{
         if(this.state.edit){
             axios.put(config.apiURL + "Internship/" + this.state.edit + "/update", internship).then(result => {
                 console.log("Successfully Edited Internship in Database: " + result);
+                toast.success("Edited Internship");
             }).catch(error => {
+                toast.error("Error Editing Internship");
                 console.error("Error Editing Internship in Database: " + error)
             });
         }else{
             axios.post(config.apiURL + "Internship/", internship).then(result => {
                 // TO-DO: Added Success Popup
+                toast.success("Added Internship");
                 console.log("Successfully Added Internship to Database: " + result);
             }).catch(error => {
+                toast.error("Error Adding Internship");
                 console.error("Error Adding Internship to Database: " + error)
             })
         }
@@ -249,7 +271,7 @@ class EditListing extends React.Component{
                             </label>
                         </div>
                         <h3>(Payment Processing Goes Here)</h3>
-                        <input type="submit" className={ this.state.published ? 'btn btn-success' : 'btn btn-secondary' } value={ this.state.published ? this.state.edit ? 'Save Changes' : 'Publish Internship' : 'Save Draft' }></input>
+                        <input type="submit" className={ this.state.published ? 'btn btn-success' : 'btn btn-secondary' } value={ this.state.published ? this.state.edit ? 'Save Changes' : 'Publish Internship' : 'Save Changes' }></input>
                     </form>
                 </div>
             );
