@@ -32,13 +32,13 @@ router.post(
 		try {
 			let user = await User.findOne({ email });
 			if (!user) {
-				return res.status(400).json({ error: [ { msg: 'Wrong email and /or password. Please try again' } ] });
+				return res.status(400).json({ errors: [ { msg: 'Wrong email and /or password. Please try again' } ] });
 			}
 
 			const match = await bcrypt.compare(password, user.password);
 
 			if (!match) {
-				return res.status(400).json({ error: [ { msg: 'Wrong email and /or password. Please try again' } ] });
+				return res.status(400).json({ errors: [ { msg: 'Wrong email and /or password. Please try again' } ] });
 			}
 
 			const payload = {
@@ -47,7 +47,7 @@ router.post(
 				}
 			};
 
-			jwt.sign(payload, config.get('JWTSecret'), { expiresIn: 480000 }, (err, token) => {
+			jwt.sign(payload, config.get('JWTSecret'), { expiresIn: 30 }, (err, token) => {
 				if (err) throw err;
 				res.json({ token });
 			});
