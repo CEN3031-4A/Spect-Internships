@@ -1,6 +1,4 @@
-This is Kyle testing git.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 This project contains an example project board meant to showcase how one can be used. The issues posted to it are not real issues.
 
 #### _**IMPORTANT NOTE**_ - 
@@ -79,3 +77,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
