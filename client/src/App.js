@@ -5,7 +5,7 @@ import NotFound from "./views/NotFound"
 import Header from "./components/Header/Header"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-
+import ViewListing from './views/ViewListing';
 import EditListing from './views/EditListing';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,6 +29,7 @@ const App = () => {
         <Route exact path="/businessProfile/edit/:id" component={EditBusinessProfile}/>
         <Route exact path="/studentProfile/add" component={updateStudentProfile}/>
         <Route exact path="/studentProfile/edit/:id" component={updateStudentProfile}/>
+		<Route exact path="/listing/view/:id" component={ViewListing}/>
         <Route component={NotFound}/>
       </Switch>
       <ToastContainer
