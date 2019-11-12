@@ -2,8 +2,11 @@ const path = require('path'),
     express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
+
     cors = require('cors'),
     bodyParser = require('body-parser'),
+   internshipRouter = require('../routes/internships.server.routes');
+    marketRouter = require('../routes/markets.server.routes');
     businessProfileRouter = require('../routes/businessProfiles.server.routes');
     studentProfileRouter = require('../routes/studentProfile.server.routes');
 
@@ -33,10 +36,13 @@ module.exports.init = () => {
     app.use(cors());
 
     // add a router'
+   app.use('/api/Internship', internshipRouter);
+    app.use('/api/Market', marketRouter);
    app.use('/api/businessProfile', businessProfileRouter);
     app.use('/api/studentProfile', studentProfileRouter);
 
-    if (process.env.NODE_ENV === 'production') {
+
+    if (process.env.NODE_ENV === 'production' || true) {
         // Serve any static files
         app.use(express.static(path.join(__dirname, '../../client/build')));
 
