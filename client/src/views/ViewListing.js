@@ -35,7 +35,6 @@ class ViewListing extends React.Component {
         axios.get(config.apiURL + "Market/").then(results => {
             this.setState({
                 markets: results.data,
-                market: results.data[0]._id,
                 loading: false
             })
         }).catch(error => {
@@ -48,9 +47,9 @@ class ViewListing extends React.Component {
     }
 
     findMarket(id){
-        return this.state.markets.find((market) =>{
+        return this.state.markets.filter((market) =>{
             return market._id === id;
-        })
+        })[0];
     }
 
     loadListing(){
@@ -115,9 +114,7 @@ class ViewListing extends React.Component {
 
             return (
 
-            
-
-                <p className="container text-center">
+            <div className="container">
 
                 <h1>
                     <i>
@@ -129,44 +126,44 @@ class ViewListing extends React.Component {
                 <div style={ { margin: 10 + 'px' }}>  
 
                 <div className = "row" style={ { margin: 20 + 'px' }}>
-                    <h5 class= "text-left w-25">Description: </h5>     
-                    <t class = "col text-left">{this.state.description}</t>
+                    <h5 className= "text-left w-25">Description: </h5>     
+                    <p className="col text-left">{this.state.description}</p>
                 </div>
                 <hr></hr>
 
-                <div className = "row" style={ { margin: 20 + 'px' }}>
-                    <h5 class= "text-left w-25">Requirements: </h5>
-                    <t class= "col text-left">{this.state.requirements}</t>.
+                <div className="row" style={ { margin: 20 + 'px' }}>
+                    <h5 className= "text-left w-25">Requirements: </h5>
+                    <p className= "col text-left">{this.state.requirements}</p>.
                 </div>
                 <hr></hr>
 
                 <div className = "row" style={ { margin: 20 + 'px' }}>
                     <h5 className="text-left w-25" >Industry: </h5>
-                    <t className="col text-left">{this.state.industry}</t>
+                    <p className="col text-left">{this.state.industry}</p>
                 </div>
                 <hr></hr>
 
                 <div className = "row" style={ { margin: 20 + 'px' }}>
                     <h5 className="text-left w-25" >Market: </h5>
-                    <t className="col text-left">{this.state.market}</t>
+                    <p className="col text-left">{this.state.market}</p>
                 </div>
                 <hr></hr>
 
                 <div className = "row" style={ { margin: 20 + 'px' }}>
                     <h5 className="text-left w-25">Compensation: </h5>
-                    <t className="col text-left">{this.state.compensation},</t>
+                    <p className="col text-left">{this.state.compensation},</p>
                 </div>
                 <hr></hr>
 
                 <div className = "row" style={ { margin: 20 + 'px' }}>
                     <h5 className="text-left w-25">Duration: </h5>
-                    <t className="col text-left">{this.state.duration}</t>
+                    <p className="col text-left">{this.state.duration}</p>
                 </div>
                 <hr></hr>
 
                 </div>
 
-                <div class= "bg-transparent text-center">
+                <div className= "bg-transparent text-center">
                 <a href = {this.state.applicationLink}
                 target = '_BLANK'
                 className = 'btn btn-primary'
@@ -175,8 +172,7 @@ class ViewListing extends React.Component {
                 </a>
                 </div>
 
-                </p>
-            
+            </div>
             )
         }
     }

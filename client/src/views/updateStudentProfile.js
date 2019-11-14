@@ -30,7 +30,7 @@ class updateStudentProfile extends React.Component{
         }
     }
 
-    loadBusinessProfile(){
+    loadStudentProfile(){
         axios.get(config.apiURL + "studentProfile/" + this.state.edit).then(results => {
             console.log(results);
             var listing = results.data
