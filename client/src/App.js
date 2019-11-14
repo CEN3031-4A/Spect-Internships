@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import updateStudentProfile from './views/updateStudentProfile';
 import EditBusinessProfile from './views/EditBusinessProfile';
 
+import AllListings from "./views/AllListings";
+
 
 const App = () => {
   return (
@@ -22,7 +24,6 @@ const App = () => {
         <Route exact path="/">
           <Redirect to="/Home" />
         </Route>
-        <Route exact path="/listing" component={ViewListing} />
         <Route exact path="/listing/add" component={EditListing}/>
         <Route exact path="/listing/edit/:id" component={EditListing}/>
          <Route exact path="/businessProfile/add" component={EditBusinessProfile}/>
@@ -30,6 +31,7 @@ const App = () => {
         <Route exact path="/studentProfile/add" component={updateStudentProfile}/>
         <Route exact path="/studentProfile/edit/:id" component={updateStudentProfile}/>
 	    	<Route exact path="/listing/view/:id" component={ViewListing}/>
+        <Route exact path="/listing" component={AllListings} />
         <Route component={NotFound}/>
       </Switch>
       <ToastContainer

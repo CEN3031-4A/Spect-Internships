@@ -4,7 +4,7 @@ import axios from 'axios';
 import config from '../config';
 
 
-class ViewListing extends React.Component {
+class AllListings extends React.Component {
 
     constructor(props) {
         super(props)
@@ -44,23 +44,23 @@ class ViewListing extends React.Component {
     }
 
     render() {
-            if(!this.state.loading){
-                return (
-                    <div>
-                        <ul>
-                            {this.state.listings.map((listing, index) => (
-                                <li key={index}><a href={'/listing/view/' + listing._id}>{listing.title}</a></li>
-                            ))}
-                        </ul>
-                        
-                    </div>
-    
-                );
-            }else{
-                return (<p>Loading...</p>);
-            }
+        if(!this.state.loading){
+            return (
+                <div>
+                    <ul>
+                        {this.state.listings.map((listing, index) => (
+                            <li key={index}><a href={'/listing/view/' + listing._id}>{listing.title}</a></li>
+                        ))}
+                    </ul>
+
+                </div>
+
+            );
+        }else{
+            return (<p>Loading...</p>);
+        }
     }
 
 
 }
-export default ViewListing;
+export default AllListings;
