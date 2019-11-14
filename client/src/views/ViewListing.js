@@ -34,7 +34,6 @@ class ViewListing extends React.Component {
                     errorLoading: true
                 })
             }
-
         }).catch(error => {
             console.error(error);
             this.setState({
