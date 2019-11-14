@@ -33,6 +33,7 @@ class ViewListing extends React.Component {
 
     loadMarkets(){
         axios.get(config.apiURL + "Market/").then(results => {
+            console.log(results);
             this.setState({
                 markets: results.data,
                 loading: false
@@ -47,9 +48,9 @@ class ViewListing extends React.Component {
     }
 
     findMarket(id){
-        return this.state.markets.filter((market) =>{
+        return this.state.markets.find((market) =>{
             return market._id === id;
-        })[0];
+        });
     }
 
     loadListing(){
@@ -151,7 +152,7 @@ class ViewListing extends React.Component {
 
                 <div className = "row" style={ { margin: 20 + 'px' }}>
                     <h5 className="text-left w-25">Compensation: </h5>
-                    <p className="col text-left">{this.state.compensation},</p>
+                    <p className="col text-left">{this.state.compensation}</p>
                 </div>
                 <hr></hr>
 

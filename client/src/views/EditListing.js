@@ -6,7 +6,7 @@ import Loader from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
-
+import { Redirect } from 'react-router-dom'
 
 
 
@@ -45,7 +45,7 @@ class EditListing extends React.Component{
                 markets: results.data,
                 market: results.data[0]._id,
                 loading: false
-            })
+            });
         }).catch(error => {
             console.error(error);
             this.setState({
@@ -66,13 +66,15 @@ class EditListing extends React.Component{
                     title: listing.title,
                     description: listing.description,
                     requirements: listing.requirements,
-                    market: listing.market,
                     industry: listing.industry,
                     published: listing.published,
                     compensation: listing.compensation,
                     duration: listing.duration,
                     applicationLink: listing.applicationLink
                 });
+                if(this.state.markets.length > 0){
+                    this.setState({market: listing.market});
+                }
             }else{
                 this.setState({
                     loading: false,
@@ -110,8 +112,10 @@ class EditListing extends React.Component{
                     onClick: () => {
                         axios.delete(config.apiURL + "Internship/" + this.state.edit + "/delete").then(results => {
                             console.log("Successfully deleted.");
+                            toast.success("Successfully deleted internship");
                             // TO-DO: REDIRECT TO MY LISTINGS PAGE & SUCCESS TOAST
                         }).catch(erro => {
+                            toast.error("Error deleting internship")
                             console.log("Error Deleting");
                             // TO-DO: Popup Error Toast
                         });
@@ -128,7 +132,7 @@ class EditListing extends React.Component{
         }
     }
     
-    processForm(event){
+    async processForm(event){
         event.preventDefault();
         var internship = {
             title: this.state.title,
@@ -142,7 +146,6 @@ class EditListing extends React.Component{
             published: this.state.published
             // TO-DO: ADD LOGGED IN COMPANY ID INFORMATION
         }
-        console.log(internship);
         if(this.state.edit){
             axios.put(config.apiURL + "Internship/" + this.state.edit + "/update", internship).then(result => {
                 console.log("Successfully Edited Internship in Database: " + result);
@@ -154,16 +157,34 @@ class EditListing extends React.Component{
         }else{
             axios.post(config.apiURL + "Internship/", internship).then(result => {
                 // TO-DO: Added Success Popup
+                console.log("Successfully Added Internship to Database: " + JSON.stringify(result));
+                this.setState({ redirect: true, edit: result.data.result._id }  );
                 toast.success("Added Internship");
-                console.log("Successfully Added Internship to Database: " + result);
             }).catch(error => {
                 toast.error("Error Adding Internship");
                 console.error("Error Adding Internship to Database: " + error)
-            })
+            });
         }
     }
 
+    renderRedirect() {
+        if (this.state.redirect) {
+          return <Redirect to={'/listing/edit/' + this.state.edit } />
+        }
+      }
+
     render(){
+
+        let button;
+        if(this.state.edit){
+            button = (
+                <div>
+                    <button className="btn btn-outline-danger" style={ { margin: 5 + 'px' }} onClick={this.deleteListing.bind(this)}><i className="fa fa-trash"/> Delete Listing</button>
+                    <a className="btn btn-outline-secondary" style={ { margin: 5 + 'px' }} href={'/listing/view/' + this.state.edit } target="_BLANK"><i className="fa fa-external-link"/> View Listing</a>
+                </div>
+            );
+        }
+
         if(this.state.errorLoading && !this.state.loading){
             return(
             <div className="container">
@@ -189,11 +210,11 @@ class EditListing extends React.Component{
         }else{
             return(
                 <div className="container" style={{ marginBottom: 25 + 'px' }}>
+                    { this.renderRedirect()}
                     <h1>{ this.state.edit ? 'Edit Internship' : 'Add New Internship' }</h1>
                     {/* <button class="btn btn-secondary">Return to Listings</button> */}
-                    <button className="btn btn-outline-danger" style={ { margin: 5 + 'px' }} onClick={this.deleteListing.bind(this)}><i className="fa fa-trash"/> Delete Listing</button>
-                    <button className="btn btn-outline-secondary" style={ { margin: 5 + 'px' }}><i className="fa fa-external-link"/> View Listing</button>
-                    <hr></hr>
+                    { button }
+                     <hr></hr>
                     <form onSubmit={this.processForm.bind(this)}>
                         <div className="form-group">
                             <label htmlFor="title">Internship Title</label>
