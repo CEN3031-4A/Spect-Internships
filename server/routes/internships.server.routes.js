@@ -14,5 +14,8 @@ router.route('/:id/delete')
 
 router.route("/:id/update")
   .put(internshipController.update);
+
+router.route("/listing")
+    .get(internshipController.list);
   
 module.exports = router;
