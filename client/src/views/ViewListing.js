@@ -13,36 +13,20 @@ class ViewListing extends React.Component {
             markets: [],
             errorLoading: false,
             loading: true,
-            //Listing Information
-            title: '',
-            description: '',
-            requirements: '',
-            market: '',
-            industry: 'Engineering',
-            published: false,
-            compensation: 'Paid',
-            duration: '1 Month',
-            applicationLink: ''
+            listings: []
         };
+        this.loadListing();
     }
 
     loadListing() {
         axios.get(config.apiURL + "Internship/").then(results => {
             console.log(results);
-            var listing = results.data;
-            if (listing) {
-                console.log(listing);
+            var listings = results.data;
+            if (listings) {
+                console.log(listings);
                 this.setState({
                     loading: false,
-                    title: listing.title,
-                    description: listing.description,
-                    requirements: listing.requirements,
-                    market: listing.market,
-                    industry: listing.industry,
-                    published: listing.published,
-                    compensation: listing.compensation,
-                    duration: listing.duration,
-                    applicationLink: listing.applicationLink
+                    listings: listings
                 })
             } else {
                 this.setState({
@@ -61,14 +45,21 @@ class ViewListing extends React.Component {
     }
 
     render() {
-            return (
-                <div>
-                    {props.listing.map((listing, index) => (
-                        <Item key={index} item={listing} />
-                    ))};
-                </div>
-
-            );
+            if(!this.state.loading){
+                return (
+                    <div>
+                        <ul>
+                            {this.state.listings.map((listing, index) => (
+                                <li key={index}><a href={'/listing/view/' + listing._id}>{listing.title}</a></li>
+                            ))}
+                        </ul>
+                        
+                    </div>
+    
+                );
+            }else{
+                return (<p>Loading...</p>);
+            }
     }
 
 
