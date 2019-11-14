@@ -24,24 +24,8 @@ class ViewListing extends React.Component{
         };
     }
 
-    loadMarkets(){
-        axios.get(config.apiURL + "Market/").then(results => {
-            this.setState({
-                markets: results.data,
-                market: results.data[0]._id,
-                loading: false
-            })
-        }).catch(error => {
-            console.error(error);
-            this.setState({
-                loading: false,
-                errorLoading: true
-            })
-        });
-    }
-
     loadListing(){
-        axios.get(config.apiURL + "Internship/" + this.state.edit).then(results => {
+        axios.get(config.apiURL + "Internship/" ).then(results => {
             console.log(results);
             var listing = results.data
             if(listing){
@@ -75,26 +59,11 @@ class ViewListing extends React.Component{
     }
 
     render(){
-        return(
-            <div className = "form-group">
-                <label htmlFor="market">Position Market</label>
-                <select className="form-control" name="market" value={this.state.market} onChange={this.handleInputChange.bind(this)} required>
-                    <option disabled value>-- SELECT --</option>
-                    {
-                        this.state.markets.map(market => {
-                            if(market.published){
-                                return (<option value={market._id} key={market._id}>{ market.name} </option>);
-                            }else{
-                                return null;
-                            }
-                        })
-                    }
-                </select>
-            </div>
+            return(
+                <td> {"hey"} </td>
 
-
-        );
+            );
     }
-}
 
+}
 export default ViewListing;
