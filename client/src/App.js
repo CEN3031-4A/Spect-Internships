@@ -6,7 +6,7 @@ import Header from "./components/Header/Header"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
-import ViewListing from "./views/ViewListing";
+import AllListings from "./views/AllListings";
 
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
         <Route exact path="/">
           <Redirect to="/Home" />
         </Route>
-          <Route exact path="/listing" component={ViewListing} />
+          <Route exact path="/listing" component={AllListings} />
 
         <Route component={NotFound}/>
       </Switch>
