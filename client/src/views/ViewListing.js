@@ -61,19 +61,16 @@ class ViewListing extends React.Component {
     }
 
     render() {
-       this.data.map(listing => {
             return (
                 <div>
-
-                    <tr key={this.state.title}>
-                        <td>{this.state.title}</td>
-                    </tr>
+                    {props.listing.map((listing, index) => (
+                        <Item key={index} item={listing} />
+                    ))};
                 </div>
 
             );
-       })
-        return <tbody>{ViewListing}</tbody>;
-        }
+    }
+
 
 }
 export default ViewListing;
