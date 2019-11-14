@@ -9,6 +9,7 @@ class ViewListing extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            data: this.props,
             markets: [],
             errorLoading: false,
             loading: true,
@@ -60,17 +61,19 @@ class ViewListing extends React.Component {
     }
 
     render() {
-        map(listing => {
+       this.data.map(listing => {
             return (
-                <tr key={listing.id}>
-                    <td>{listing.title}</td>
-                    <td>{listing.description}</td>
-                </tr>
+                <div>
+
+                    <tr key={this.state.title}>
+                        <td>{this.state.title}</td>
+                    </tr>
+                </div>
 
             );
-        });
+       })
         return <tbody>{ViewListing}</tbody>;
-    }
+        }
 
 }
 export default ViewListing;
