@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment, useEffect} from 'react';
 import { Route, Switch, Redirect  } from 'react-router-dom';
 import Home from "./views/Home/Home"
 import NotFound from "./views/NotFound"
@@ -11,18 +11,31 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import updateStudentProfile from './views/updateStudentProfile';
 import EditBusinessProfile from './views/EditBusinessProfile';
+import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
+import Alert from './components/layout/Alert';
+import { Provider } from 'react-redux';
+import store from './store';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
 
 const App = () => {
+  useEffect(() => {
+		store.dispatch(loadUser());
+	}, []);
   return (
+    <Provider store={store}>
     <div>
       <Header />
+      <Alert />
       <Switch>
         <Route exact path="/Home" component={Home} />
         <Route exact path="/">
           <Redirect to="/Home" />
         </Route>
-
+        <Route exact path="/signup" component={SignUp} />
+						<Route exact path="/login" component={Login} />
         <Route exact path="/listing/add" component={EditListing}/>
         <Route exact path="/listing/edit/:id" component={EditListing}/>
          <Route exact path="/businessProfile/add" component={EditBusinessProfile}/>
@@ -31,6 +44,7 @@ const App = () => {
         <Route exact path="/studentProfile/edit/:id" component={updateStudentProfile}/>
 		<Route exact path="/listing/view/:id" component={ViewListing}/>
         <Route component={NotFound}/>
+        
       </Switch>
       <ToastContainer
           position="bottom-right"
@@ -44,6 +58,7 @@ const App = () => {
           pauseOnHover
           />
     </div>
+    </Provider>
   );
 }
 
