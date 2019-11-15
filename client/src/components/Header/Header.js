@@ -19,9 +19,12 @@ const Header = () => {
             <li className="nav-item">
               <a className="nav-link" href="/listing/add">Add</a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/listing">View</a>
+            </li>
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
+                Profiles
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <a className="dropdown-item" href="/studentProfile/edit/5dc8ce69d5d81243d0441210">Edit Student Profile</a>
@@ -40,7 +43,7 @@ const Header = () => {
           </form> */}
           <li className="nav-item dropdown navbar navbar-right">
               <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user"></i>  John Doe
+                <i className="fa fa-user"></i>  John Doe
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" href="/studentProfile/edit/5dc8ce69d5d81243d0441210">My Profile</a>
