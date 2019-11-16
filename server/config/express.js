@@ -5,6 +5,8 @@ const path = require('path'),
     cors = require('cors'),
     bodyParser = require('body-parser'),
     businessProfileRouter = require('../routes/businessProfiles.server.routes');
+    studentProfileRouter = require('../routes/studentProfile.server.routes');
+
 
 module.exports.init = () => {
     /* 
@@ -27,12 +29,12 @@ module.exports.init = () => {
     // body parsing middleware
     app.use(bodyParser.json());
 
-    //Disables Coors
-    //TO-DO REMOVE IN PRODUCTION
+
     app.use(cors());
-    
-    // add a router
-    app.use('/api/businessProfile', businessProfileRouter);
+
+    // add a router'
+   app.use('/api/businessProfile', businessProfileRouter);
+    app.use('/api/studentProfile', studentProfileRouter);
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files

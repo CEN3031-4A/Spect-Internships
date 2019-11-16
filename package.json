@@ -21,19 +21,27 @@
   "author": "Dakota Rennemann",
   "license": "MIT",
   "dependencies": {
+     "body-parser": "^1.19.0",
+    "axios": "^0.19.0",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mocha": "^6.2.1",
-    "mongoose": "^5.7.7",
+    "mongoose": "^5.7.1",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
+<<<<<<< HEAD
     "react-toastify": "^5.4.1",
+=======
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-loader-spinner": "^3.1.4",
+>>>>>>> d4d8d1259ce99b5be56e3c9887bcba0748dd695b
     "should": "^13.2.3",
     "supertest": "^4.0.2"
   },
-  "homepage": "https://github.com/UFWebApps/React_Template_Repo#readme",
+    "homepage": "https://github.com/UFWebApps/React_Template_Repo#readme",
   "bugs": {
     "url": "https://github.com/UFWebApps/React_Template_Repo/issues"
   }
