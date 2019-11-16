@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import config from '../config';
 import Loader from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 class EditBusinessProfile extends React.Component{
 
@@ -79,23 +80,26 @@ class EditBusinessProfile extends React.Component{
             address: this.state.address,
             description: this.state.description,
             website: this.state.website,
-            email: this.state.email,
-            useraccount: this.state.useraccount,
+            email: this.state.email
         }
         console.log(business_profile);
 
         if(this.state.edit){
             axios.put(config.apiURL + "businessProfile/" + this.state.edit, business_profile).then(result => {
                 console.log("Successfully Edited Business Profile in Database: " + result);
+                toast.success("Edited Business Profile");
             }).catch(error => {
-                console.error("Error Editing Business Profile in Database: " + error)
+                console.error("Error Editing Business Profile in Database: " + error);
+                toast.error("Error Editing Business Profile");
             });
         }else{
             axios.post(config.apiURL + "businessProfile/", business_profile).then(result => {
-                // TO-DO: Added Success Popup
                 console.log("Successfully Added Business Profile to Database: " + result);
+                toast.success("Added Business Profile");
             }).catch(error => {
                 console.error("Error Adding Business Profile to Database: " + error)
+                toast.error("Error Adding Business Profile");
+
             })
         }
     }
