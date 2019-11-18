@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import updateStudentProfile from './views/updateStudentProfile';
 import EditBusinessProfile from './views/EditBusinessProfile';
-
+import businessListings from "./views/businessListings";
 import AllListings from "./views/AllListings";
 
 
@@ -32,6 +32,7 @@ const App = () => {
         <Route exact path="/studentProfile/edit/:id" component={updateStudentProfile}/>
 	    	<Route exact path="/listing/view/:id" component={ViewListing}/>
         <Route exact path="/listing" component={AllListings} />
+        <Route exact path="/businessListings" component={businessListings} />
         <Route component={NotFound}/>
       </Switch>
       <ToastContainer

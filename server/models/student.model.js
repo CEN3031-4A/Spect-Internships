@@ -8,6 +8,9 @@ var Student_ProfileSchema = new Schema({
   useraccount: {type: Schema.ObjectId, required: false},
   email: {type: String, required: false},
   description: {type: String, required: false},
+  skills1: {type: String, required: false},
+  skills2: {type: String, required: false},
+  skills3: {type: String, required: false},
   updated_at: Date,
   created_at: Date
 });
