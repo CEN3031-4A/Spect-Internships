@@ -9,7 +9,8 @@ class businessListings extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            view: this.props.match.params.id,
+            
+            view: this.props.match.params.id ? this.props.match.params.id : false,
             data: this.props,
             markets: [],
             errorLoading: false,
@@ -20,7 +21,7 @@ class businessListings extends React.Component {
     }
 
     loadBusinessInternships() {
-        axios.get(config.apiURL + "businessProfile/").then(results => {
+        axios.get(config.apiURL + "businessProfile/" + this.state.view).then(results => {
             console.log(results);
             var listings = results.data;
             if (listings) {
