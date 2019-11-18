@@ -11,6 +11,6 @@ router.route('/:id')
   .put(businessProfileRouter.update);
 
   router.route(':id/listing')
-  .get(businessProfileRouter.list);
+  .get(businessProfileRouter.findListingByBusiness);
 
   module.exports = router; 
