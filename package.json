@@ -32,8 +32,12 @@
     "mongoose": "^5.7.1",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
+<<<<<<< HEAD
+    "react-toastify": "^5.4.1",
+=======
     "react-bootstrap": "^1.0.0-beta.14",
     "react-loader-spinner": "^3.1.4",
+>>>>>>> d4d8d1259ce99b5be56e3c9887bcba0748dd695b
     "should": "^13.2.3",
     "supertest": "^4.0.2"
   },
