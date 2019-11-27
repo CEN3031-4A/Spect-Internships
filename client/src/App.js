@@ -19,6 +19,8 @@ import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
+import AllListings from "./views/AllListings";
+
 
 const App = () => {
   useEffect(() => {
@@ -35,14 +37,15 @@ const App = () => {
           <Redirect to="/Home" />
         </Route>
         <Route exact path="/signup" component={SignUp} />
-						<Route exact path="/login" component={Login} />
+				<Route exact path="/login" component={Login} />
         <Route exact path="/listing/add" component={EditListing}/>
         <Route exact path="/listing/edit/:id" component={EditListing}/>
          <Route exact path="/businessProfile/add" component={EditBusinessProfile}/>
         <Route exact path="/businessProfile/edit/:id" component={EditBusinessProfile}/>
         <Route exact path="/studentProfile/add" component={updateStudentProfile}/>
         <Route exact path="/studentProfile/edit/:id" component={updateStudentProfile}/>
-		<Route exact path="/listing/view/:id" component={ViewListing}/>
+	    	<Route exact path="/listing/view/:id" component={ViewListing}/>
+        <Route exact path="/listing" component={AllListings} />
         <Route component={NotFound}/>
         
       </Switch>

@@ -22,21 +22,18 @@ class ViewListing extends React.Component {
                 compensation: 'Paid',
                 duration: '1 Month',
                 applicationLink: ''
-            
-        };
-        this.loadMarkets();
-        if(this.state.edit){ 
-            this.state.loading = true;
-            this.loadListing();
         }
+        this.loadListing();
     }
 
     loadMarkets(){
         axios.get(config.apiURL + "Market/").then(results => {
+            console.log(results);
             this.setState({
                 markets: results.data,
                 loading: false
-            })
+            });
+            this.findMarket();
         }).catch(error => {
             console.error(error);
             this.setState({
@@ -46,10 +43,13 @@ class ViewListing extends React.Component {
         });
     }
 
-    findMarket(id){
-        return this.state.markets.filter((market) =>{
-            return market._id === id;
-        })[0];
+    findMarket(){
+        var market = this.state.markets.find((market) =>{
+            return market._id === this.state.market;
+        });
+        this.setState({
+            market: market.name
+        });
     }
 
     loadListing(){
@@ -63,13 +63,14 @@ class ViewListing extends React.Component {
                     title: listing.title,
                     description: listing.description,
                     requirements: listing.requirements,
-                    market: this.findMarket(listing.market).name,
                     industry: listing.industry,
+                    market: listing.market,
                     published: listing.published,
                     compensation: listing.compensation,
                     duration: listing.duration,
                     applicationLink: listing.applicationLink
                 });
+                this.loadMarkets();
             }else{
                 this.setState({
                     loading: false,
@@ -151,7 +152,7 @@ class ViewListing extends React.Component {
 
                 <div className = "row" style={ { margin: 20 + 'px' }}>
                     <h5 className="text-left w-25">Compensation: </h5>
-                    <p className="col text-left">{this.state.compensation},</p>
+                    <p className="col text-left">{this.state.compensation}</p>
                 </div>
                 <hr></hr>
 
