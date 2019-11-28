@@ -20,14 +20,13 @@ const Login = ({ login, isAuthenticated }) => {
 	if (isAuthenticated) {
 		return <Redirect to="/Home" />;
 	}
+	// localStorage.clear();
 	return (
 		<Fragment>
 			<div className="login-section">
-			<div className="login-page">
-				<div className="form">
-					
-					<form className="login-form" onSubmit={(e) => onSubmit(e)}>
-						
+				<div className="login-page">
+					<div className="form">
+						<form className="login-form" onSubmit={(e) => onSubmit(e)}>
 							<input
 								type="email"
 								placeholder="Email Address"
@@ -36,8 +35,7 @@ const Login = ({ login, isAuthenticated }) => {
 								onChange={(e) => onChange(e)}
 								required
 							/>
-						
-						
+
 							<input
 								type="password"
 								placeholder="Password"
@@ -47,18 +45,14 @@ const Login = ({ login, isAuthenticated }) => {
 								onChange={(e) => onChange(e)}
 								required
 							/>
-						
-						
-							<button className="btn btn-primary uppercase">
-								LOG IN 
-							</button>
-						
-					</form>
-					<p className="message">
-						Don't have an account? <Link to="/signup">Create Account </Link>
-					</p>
+
+							<button className="btn btn-primary uppercase">LOG IN</button>
+						</form>
+						<p className="message">
+							Don't have an account? <Link to="/signup">Create Account </Link>
+						</p>
+					</div>
 				</div>
-			</div>
 			</div>
 		</Fragment>
 	);
