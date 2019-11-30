@@ -12,7 +12,6 @@ class businessListings extends React.Component {
             
             view: this.props.match.params.id ? this.props.match.params.id : false,
             data: this.props,
-            markets: [],
             errorLoading: false,
             loading: true,
             listings: []
