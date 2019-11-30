@@ -14,13 +14,14 @@ class businessListings extends React.Component {
             data: this.props,
             errorLoading: false,
             loading: true,
-            listings: []
+            listings: [],
+            name: ''
         };
         this.loadBusinessInternships();
     }
 
     loadBusinessInternships() {
-        axios.get(config.apiURL + "businessProfile/" + this.state.view).then(results => {
+        axios.get(config.apiURL + "Internship/" + this.state.view ).then(results => { //Internship business ID? 
             console.log(results);
             var listings = results.data;
             if (listings) {
@@ -51,7 +52,7 @@ class businessListings extends React.Component {
                 <div>
                     <ul>
                         {this.state.listings.map((listing, index) => (
-                            <li key={index}><a href={'/businessListings/view/' + listing.business_id}>{listing.name}</a></li>
+                            <li key={index}><a href={'/listing/view/' + listing.business_id}>{listing.title}</a></li>
                         ))}
                     </ul>
 
