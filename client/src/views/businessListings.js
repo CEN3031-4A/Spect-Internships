@@ -52,7 +52,7 @@ class businessListings extends React.Component {
                 <div>
                     <ul>
                         {this.state.listings.map((listing, index) => (
-                            <li key={index}><a href={'/listing/view/' + listing._id}>{listing.title}</a></li>
+                            <li key={index}><a href={'/businessListings/view/' + listing.business_id}>{listing.name}</a></li>
                         ))}
                     </ul>
 
