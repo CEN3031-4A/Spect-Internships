@@ -82,7 +82,7 @@ class EditBusinessProfile extends React.Component {
 			description: this.state.description,
 			website: this.state.website,
 			email: this.state.email,
-			useraccount: this.state.useraccount
+			// Removed useraccount
 		};
 		console.log(business_profile);
 
