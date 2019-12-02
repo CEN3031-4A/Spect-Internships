@@ -2,6 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import config from '../config';
 import Loader from 'react-loader-spinner';
+import { link } from 'fs';
+import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+
+
 
 
 
@@ -84,22 +89,39 @@ class updateStudentProfile extends React.Component{
         if(this.state.edit){
             axios.put(config.apiURL + "studentProfile/" + this.state.edit, student_profile).then(result => {
                 console.log("Successfully Edited Student Profile in Database: " + result);
+                toast.success("Successfully edited profile");
             }).catch(error => {
-                console.error("Error Editing Student Profile in Database: " + error)
+                console.error("Error Editing Student Profile in Database: " + error);
+                toast.error("Error Editing Profile");
             });
             
         }else{
             axios.post(config.apiURL + "studentProfile/", student_profile).then(result => {
                 
-                console.log("Successfully Added Student Profile to Database: " + result);
+                console.log("Successfully Added Student Profile to Database: " + JSON.stringify(result));
+                this.linkProfile(result.data.result._id);
             }).catch(error => {
                 console.error("Error Adding Student Profile to Database: " + error)
+                toast.error("Error Adding Profile");
             })
     
         }
     }
 
+    linkProfile(id){
+		console.log("Working on it...");
+		axios
+				.put(config.apiURL + 'users/', { _id: this.props.auth.user._id, profile: id })
+				.then((result) => {
+                    console.log('Successfully Edited User Profile in Database: ' + result);
+                    toast.success("Successfully Added Profile");
+				})
+				.catch((error) => {
+                    console.error('Error Editing User Profile in Database: ' + error);
+                    toast.error("Error Adding Profile");
+				});
 
+	}
 
 
 
@@ -156,4 +178,10 @@ class updateStudentProfile extends React.Component{
     }
 }
 
-export default updateStudentProfile; 
+function mapStateToProps(state) {
+	return {
+		auth: state.auth
+	};
+}
+
+export default connect(mapStateToProps)(updateStudentProfile);

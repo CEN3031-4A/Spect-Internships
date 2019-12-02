@@ -7,6 +7,26 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const JsonSecret = require('../../config/config').JSONSecret;
 
+router.put('/',
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
+		try {
+			let user = User.findOneAndUpdate({ _id: req.body._id }, { profile: req.body.profile }, (err, success) => {
+				if(err){
+					console.error("Error: " + err);
+				}else{
+					res.send(success);
+				}
+			});
+		} catch (e) {
+			console.error("Error: " + e.message);
+			res.status(500).send('Server Error');
+		}
+	}
+);
+
 router.post(
 	'/',
 	[
@@ -20,7 +40,7 @@ router.post(
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-		const { name, email, password } = req.body;
+		const { name, email, password, business } = req.body;
 
 		try {
 			let user = await User.findOne({ email });
@@ -37,7 +57,8 @@ router.post(
 				name,
 				email,
 				avatar,
-				password
+				password,
+				business
 			});
 
 			const salt = await bcrypt.genSalt();

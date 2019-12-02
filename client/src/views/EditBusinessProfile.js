@@ -3,6 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import config from '../config';
 import Loader from 'react-loader-spinner';
+import { toast } from 'react-toastify';
+
 
 class EditBusinessProfile extends React.Component {
 	constructor(props) {
@@ -72,7 +74,7 @@ class EditBusinessProfile extends React.Component {
 		// console.log(this.props.auth.user);
 	}
 
-	handleSubmit(event) {
+	async handleSubmit(event) {
 		event.preventDefault();
 		var business_profile = {
 			name: this.state.name,
@@ -89,21 +91,41 @@ class EditBusinessProfile extends React.Component {
 				.put(config.apiURL + 'businessProfile/' + this.state.edit, business_profile)
 				.then((result) => {
 					console.log('Successfully Edited Business Profile in Database: ' + result);
+					toast.success("Successfully Edited Profile");
 				})
 				.catch((error) => {
 					console.error('Error Editing Business Profile in Database: ' + error);
+					toast.error("Error Editing Profile");
 				});
 		} else {
-			axios
+			let id = null;
+			await axios
 				.post(config.apiURL + 'businessProfile/', business_profile)
 				.then((result) => {
 					// TO-DO: Added Success Popup
-					console.log('Successfully Added Business Profile to Database: ' + result);
+					console.log('Successfully Added Business Profile to Database: ' + JSON.stringify(result));
+					this.linkProfile(result.data.result._id);
 				})
 				.catch((error) => {
-					console.error('Error Adding Business Profile to Database: ' + error);
+					console.error('Error Adding Business Profile to Database: ' + JSON.stringify(error));
+					toast.error("Error Adding Profile");
 				});
 		}
+	}
+
+	linkProfile(id){
+		console.log("Working on it...");
+		axios
+				.put(config.apiURL + 'users/', { _id: this.props.auth.user._id, profile: id })
+				.then((result) => {
+					console.log('Successfully Edited User Profile in Database: ' + result);
+					toast.success("Successfully Added Profile");
+				})
+				.catch((error) => {
+					console.error('Error Editing User Profile in Database: ' + error);
+					toast.error("Error Adding Profile");
+				});
+
 	}
 
 	render() {
@@ -204,7 +226,6 @@ class EditBusinessProfile extends React.Component {
 }
 
 function mapStateToProps(state) {
-	console.log("State Auth 2: " + JSON.stringify(state.auth));
 	return {
 		auth: state.auth
 	};

@@ -60,8 +60,8 @@ export const signup = ({ name, email, password }) => async (dispatch) => {
 			'Content-Type': 'application/json'
 		}
 	};
-
-	const body = JSON.stringify({ name, email, password });
+	let business = false;
+	const body = JSON.stringify({ name, email, password, business });
 
 	try {
 		const res = await axios.post('http://localhost:5008/api/users', body, config);
@@ -89,8 +89,8 @@ export const businessSignup = ({ name, email, password }) => async (dispatch) =>
 			'Content-Type': 'application/json'
 		}
 	};
-
-	const body = JSON.stringify({ name, email, password });
+	let business = true;
+	const body = JSON.stringify({ name, email, password, business });
 
 	try {
 		const res = await axios.post('http://localhost:5008/api/users', body, config);

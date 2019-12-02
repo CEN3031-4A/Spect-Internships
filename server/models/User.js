@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema({
 	avatar: {
 		type: String
 	},
+	business: {
+		type: Boolean,
+		default: false
+	},
 	profile: {
 		type: Schema.ObjectId
 	}

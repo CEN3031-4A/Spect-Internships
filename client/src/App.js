@@ -43,7 +43,7 @@ const App = () => {
 				<div>
 					<Header />
 					<Alert />
-					<Switch>
+					<Switch style={{ paddingTop: 10 + 'px'}}>
 						<Route exact path="/Home" component={Home} />
 						<Route exact path="/">
 							<Redirect to="/Home" />
@@ -54,9 +54,11 @@ const App = () => {
 						<Route exact path="/businessLogin" component={BusinessLogin} />
 						<Route exact path="/listing/add" component={EditListing} />
 						<Route exact path="/listing/edit/:id" component={EditListing} />
-						<BusinessPrivRoute exact path="/businessProfile/add" component={EditBusinessProfile} />
+						{/* <BusinessPrivRoute exact path="/businessProfile/add" component={EditBusinessProfile} /> */}
+						<Route exact path="/businessProfile/add" component={EditBusinessProfile} />
 						<Route exact path="/businessProfile/edit/:id" component={EditBusinessProfile} />
-						<PrivateRoute exact path="/studentProfile/add" component={updateStudentProfile} />
+						<Route exact path="/studentProfile/add" component={updateStudentProfile} />
+						{/* <PrivateRoute exact path="/studentProfile/add" component={updateStudentProfile} /> */}
 						<Route exact path="/studentProfile/edit/:id" component={updateStudentProfile} />
 						<Route exact path="/listing/view/:id" component={ViewListing} />
 						<Route exact path="/listing" component={AllListings} />

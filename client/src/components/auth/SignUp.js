@@ -26,7 +26,7 @@ const SignUp = ({ setAlert, signup, isAuthenticated }) => {
 
 	if (isAuthenticated) {
 		// console.log(isAuthenticated+'test')
-		return <Redirect to="/Home" />
+		return <Redirect to="/studentProfile/add" />
 	}
 	return (
 		<Fragment>

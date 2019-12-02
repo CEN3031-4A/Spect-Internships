@@ -26,7 +26,7 @@ const SignUp = ({ setAlert, businessSignup, isBusinessAuthenticated }) => {
 
 	if (isBusinessAuthenticated) {
 		// console.log(isAuthenticated+'test')
-		return <Redirect to="/Home" />;
+		return <Redirect to="/businessProfile/add" />;
 	}
 	return (
 		<Fragment>
