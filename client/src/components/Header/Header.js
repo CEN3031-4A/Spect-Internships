@@ -26,7 +26,7 @@ class Header extends React.Component {
 
       let noAuth = '';
 
-      if(this.props.auth.isAuthenticated){
+      if(this.props.auth.isAuthenticated && this.props.auth.user){
         if(this.props.auth.isBusinessAuthenticated){
 
         }else{

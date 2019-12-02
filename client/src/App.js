@@ -14,7 +14,6 @@ import EditBusinessProfile from './views/EditBusinessProfile';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Alert from './components/layout/Alert';
-import BusinessLogin from './components/auth/BusinessLogin';
 import BusinessSignUp from './components/auth/BusinessSignUp';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -51,7 +50,6 @@ const App = () => {
 						<Route exact path="/signup" component={SignUp} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/businessSignup" component={BusinessSignUp} />
-						<Route exact path="/businessLogin" component={BusinessLogin} />
 						<Route exact path="/listing/add" component={EditListing} />
 						<Route exact path="/listing/edit/:id" component={EditListing} />
 						{/* <BusinessPrivRoute exact path="/businessProfile/add" component={EditBusinessProfile} /> */}
