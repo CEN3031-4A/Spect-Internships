@@ -10,7 +10,7 @@ router.route('/:id')
   .get(businessProfileRouter.findOne)
   .put(businessProfileRouter.update);
 
-  router.route('/:id/listing')
+  router.route('/:id/listings')
   .get(businessProfileRouter.findListingByBusiness);
 
   router.route('/listing')
