@@ -159,7 +159,7 @@ class updateStudentProfile extends React.Component{
                 </div>
                 <div className="form-group">
                     <label htmlFor="skills">Top 3 Soft Skills </label>
-                    <select className="form-control" name="skills" value={this.state.skills1} onChange={this.handleInputChange.bind(this)} required>
+                    <select className="form-control" name="skills1" value={this.state.skills1} onChange={this.handleInputChange.bind(this)} required>
                          <option disabled value>-- SELECT --</option>
                          <option>Leadership</option>
                         <option>Minedfulness</option>
@@ -171,7 +171,7 @@ class updateStudentProfile extends React.Component{
                         <option>Teamwork</option>
                         <option>Global Awareness</option>
                         </select>
-                        <select className="form-control" name="skills" value={this.state.skills2} onChange={this.handleInputChange.bind(this)} required>
+                        <select className="form-control" name="skills2" value={this.state.skills2} onChange={this.handleInputChange.bind(this)} required>
                          <option disabled value>-- SELECT --</option>
                          <option>Leadership</option>
                         <option>Minedfulness</option>
@@ -183,7 +183,7 @@ class updateStudentProfile extends React.Component{
                         <option>Teamwork</option>
                         <option>Global Awareness</option>
                         </select>
-                        <select className="form-control" name="skills" value={this.state.skills3} onChange={this.handleInputChange.bind(this)} required>
+                        <select className="form-control" name="skills3" value={this.state.skills3} onChange={this.handleInputChange.bind(this)} required>
                          <option disabled value>-- SELECT --</option>
                          <option>Leadership</option>
                         <option>Minedfulness</option>
