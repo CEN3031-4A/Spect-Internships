@@ -38,7 +38,7 @@ exports.list = function(req, res) {
 };
 
 exports.findListingByBusiness = function(req, res) {
-    Internship.find({business_id:req.params.id}).exec(function(err, results){  //input business ID
+    Internship.find({company:req.params.id}).exec(function(err, results){  //input business ID
             if(err){
                 console.error("Error");
                 res.status(500).send({ message: "Error loading Internship"});

@@ -21,7 +21,7 @@ class businessListings extends React.Component {
     }
 
     loadBusinessInternships() {
-        axios.get(config.apiURL + "Internship/" ).then(results => { //Internship business ID? 
+        axios.get(config.apiURL + "busintessProfile/" + this.state.view +"/listings" ).then(results => { //Internship business ID? 
             console.log(results);
             var listings = results.data;
             if (listings) {
