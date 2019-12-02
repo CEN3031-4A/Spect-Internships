@@ -50,12 +50,18 @@ class businessListings extends React.Component {
         
         if(!this.state.loading){
             return (
-                <div className="container"  >
-                    
+               
+                
+                <div className="container text-center">
+                     
+                      <div class="jumbotron text-center">
+                      <h1>View Current Internship Listings</h1>
+                        <p>Click on internship title to edit</p>
+                </div>
                 <div>
                     <ul>
                     <div className="form-group">
-                    <label htmlFor="name">Click to edit specific internship</label>
+                    <label htmlFor="name">Click to edit internship</label>
                         {this.state.listings.map((listing, index) => (
                             <li key={index}><a href={'/listing/edit/' + listing._id}>{listing.title}</a></li>  //Link is clicking on it that goes to the specific internship page
                    
