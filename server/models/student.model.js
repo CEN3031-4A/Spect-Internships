@@ -5,7 +5,6 @@ var mongoose = require('mongoose'),
 var Student_ProfileSchema = new Schema({
   name: {type: String, required: true},
   address: {type: String, required: false},
-  useraccount: {type: Schema.ObjectId, required: false},
   email: {type: String, required: false},
   description: {type: String, required: false},
   updated_at: Date,

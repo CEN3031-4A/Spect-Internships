@@ -3,7 +3,7 @@ const Internship = require('../models/internship.model.js');
 exports.update = function(req, res) {
     Internship.findOneAndUpdate({_id: req.params.id}, req.body, function(err, result){
             if(err){
-                console.error("Error");
+                console.error("Error: " + err);
                 res.status(500).send({ message: "Error Adding Internship"});
             }else{
                 res.send(result);
@@ -46,8 +46,10 @@ exports.add = function(req, res) {
         industry: req.body.industry,
         market: req.body.market,
         published: req.body.published,
+        payment: req.body.payment,
         removed: false,
-        applicationLink: req.body.applicationLink
+        applicationLink: req.body.applicationLink,
+        company: req.body.company
     });
 
     internship.save(function (err, result) {

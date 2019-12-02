@@ -34,12 +34,16 @@ module.exports.init = () => {
 
 
     app.use(cors());
+    app.use(express.json({ extended: false }));
 
     // add a router'
    app.use('/api/Internship', internshipRouter);
     app.use('/api/Market', marketRouter);
    app.use('/api/businessProfile', businessProfileRouter);
     app.use('/api/studentProfile', studentProfileRouter);
+    app.use('/api/users', require('../routes/api/users'));
+    app.use('/api/auth', require('../routes/api/auth'));
+    app.use('/api/payments', require('../routes/payments.server.routes'));
 
 
     if (process.env.NODE_ENV === 'production' || true) {
