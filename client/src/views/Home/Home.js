@@ -3,8 +3,9 @@ import logo from '../../assets/logo.svg';
 import './Home.css';
 import { Link } from 'react-router-dom';
 import { logout } from '../../actions/auth';
+import {connect} from 'react-redux';
 
-function Home() {
+function Home({logout}) {
 	return (
 		<div className="App">
 			<header className="App-header">
@@ -22,4 +23,7 @@ function Home() {
 	);
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+
+};
+export default connect(mapStateToProps, {logout})( Home);
