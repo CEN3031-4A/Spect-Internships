@@ -36,7 +36,7 @@ const App = () => {
 		store.dispatch(loadUser());
 	}, []);
 
-	// localStorage.clear();
+	//localStorage.clear();
 	return (
 		<Provider store={store}>
 			<Router>

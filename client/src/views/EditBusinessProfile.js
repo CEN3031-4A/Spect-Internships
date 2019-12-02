@@ -204,6 +204,7 @@ class EditBusinessProfile extends React.Component {
 }
 
 function mapStateToProps(state) {
+	console.log("State Auth 2: " + JSON.stringify(state.auth));
 	return {
 		auth: state.auth
 	};

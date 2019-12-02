@@ -43,6 +43,7 @@ module.exports.init = () => {
     app.use('/api/studentProfile', studentProfileRouter);
     app.use('/api/users', require('../routes/api/users'));
     app.use('/api/auth', require('../routes/api/auth'));
+    app.use('/api/payments', require('../routes/payments.server.routes'));
 
 
     if (process.env.NODE_ENV === 'production' || true) {

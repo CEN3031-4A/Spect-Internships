@@ -71,6 +71,7 @@ export const signup = ({ name, email, password }) => async (dispatch) => {
 		});
 		dispatch(loadUser());
 	} catch (err) {
+		console.error("Error Signing Up: " + err);
 		const errors = err.response.data.errors;
 		if (errors) {
 			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
@@ -170,5 +171,6 @@ export const businessLogin = (email, password) => async (dispatch) => {
 // User Logout
 
 export const logout = () => (dispatch) => {
+	console.log("Attempting logout...");
 	dispatch({ type: LOGOUT });
 };

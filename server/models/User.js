@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+Schema = mongoose.Schema;
 
 const UserSchema = new mongoose.Schema({
 	name: {
@@ -20,6 +21,9 @@ const UserSchema = new mongoose.Schema({
 	},
 	avatar: {
 		type: String
+	},
+	profile: {
+		type: Schema.ObjectId
 	}
 });
 
