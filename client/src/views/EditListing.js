@@ -7,6 +7,12 @@ import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Redirect } from 'react-router-dom'
+import PaymentForm from '../components/PaymentForm';
+import {Elements, StripeProvider} from 'react-stripe-elements';
+import { Editor } from '@tinymce/tinymce-react';
+import { connect } from 'react-redux';
+
+
 
 
 
@@ -20,6 +26,7 @@ class EditListing extends React.Component{
             markets: [],
             errorLoading: false,
             loading: true,
+            paid: false,
             //Lisitng Information
                 title: '',
                 description: '',
@@ -29,7 +36,8 @@ class EditListing extends React.Component{
                 published: false,
                 compensation: 'Paid',
                 duration: '1 Month',
-                applicationLink: ''
+                applicationLink: '',
+                paymentID: ''
             
         };
         this.loadMarkets();
@@ -101,6 +109,18 @@ class EditListing extends React.Component{
         });
     }
 
+    handleDescriptionChange(value){
+        this.setState({description: value});
+    }
+
+    handleRequirementsChange(value){
+        this.setState({requirements: value});
+    }
+
+    paymentComplete(paymentID){
+        this.setState({ paid: true, paymentID: paymentID });
+    }
+
     deleteListing(){
         if(this.state.edit){
             confirmAlert({
@@ -143,7 +163,7 @@ class EditListing extends React.Component{
             compensation: this.state.compensation,
             duration: this.state.duration,
             applicationLink: this.state.applicationLink,
-            published: this.state.published
+            published: this.state.published,
             // TO-DO: ADD LOGGED IN COMPANY ID INFORMATION
         }
         if(this.state.edit){
@@ -155,6 +175,8 @@ class EditListing extends React.Component{
                 console.error("Error Editing Internship in Database: " + error)
             });
         }else{
+            internship.payment = this.state.paymentID;
+            internship.company = this.props.auth.user.profile;
             axios.post(config.apiURL + "Internship/", internship).then(result => {
                 // TO-DO: Added Success Popup
                 console.log("Successfully Added Internship to Database: " + JSON.stringify(result));
@@ -176,12 +198,23 @@ class EditListing extends React.Component{
     render(){
 
         let button;
+        let paymentForm;
+        let submitButton = (<input type="submit" className={ this.state.published ? 'btn btn-success' : 'btn btn-secondary' } value={ this.state.published ? this.state.edit ? 'Save Changes' : 'Publish Internship' : 'Save Changes' }></input>);
         if(this.state.edit){
             button = (
                 <div>
                     <button className="btn btn-outline-danger" style={ { margin: 5 + 'px' }} onClick={this.deleteListing.bind(this)}><i className="fa fa-trash"/> Delete Listing</button>
                     <a className="btn btn-outline-secondary" style={ { margin: 5 + 'px' }} href={'/listing/view/' + this.state.edit } target="_BLANK"><i className="fa fa-external-link"/> View Listing</a>
                 </div>
+            );
+
+        }else{
+            paymentForm = (
+                <StripeProvider apiKey={config.stripePub}>
+                    <Elements>
+                        <PaymentForm paymentComplete={this.paymentComplete.bind(this)}/>
+                    </Elements>
+                </StripeProvider>
             );
         }
 
@@ -222,11 +255,47 @@ class EditListing extends React.Component{
                         </div>
                         <div className="form-group">
                             <label htmlFor="description">Position Description</label>
-                            <textarea type="textarea" rows="5" className="form-control" name="description" value={this.state.description} placeholder="This is a 3-month summer position where..." onChange={this.handleInputChange.bind(this)} required></textarea>
+                            <Editor
+                                value={this.state.description}
+                                //initialValue="<p>This is the initial content of the editor</p>"
+                                init={{
+                                height: 300,
+                                menubar: false,
+                                plugins: [
+                                    'advlist autolink lists link image charmap print preview anchor',
+                                    'searchreplace visualblocks code fullscreen',
+                                    'insertdatetime media table paste code help wordcount'
+                                ],
+                                toolbar:
+                                    'undo redo | formatselect | bold italic backcolor | \
+                                    alignleft aligncenter alignright alignjustify | \
+                                    bullist numlist outdent indent | removeformat | help'
+                                }}
+                                onEditorChange={this.handleDescriptionChange.bind(this)}
+                            />
+                            {/* <textarea type="textarea" rows="5" className="form-control" name="description" value={this.state.description} placeholder="This is a 3-month summer position where..." onChange={this.handleInputChange.bind(this)} required></textarea> */}
                         </div>
                         <div className="form-group">
                             <label htmlFor="requirements">Position Requirements</label>
-                            <textarea type="text" rows="5" className="form-control" name="requirements" value={this.state.requirements} placeholder="Experience with Java, C++, or other programming languages" onChange={this.handleInputChange.bind(this)} required></textarea>
+                            <Editor
+                                value={this.state.requirements}
+                                //initialValue="<p>This is the initial content of the editor</p>"
+                                init={{
+                                height: 300,
+                                menubar: false,
+                                plugins: [
+                                    'advlist autolink lists link image charmap print preview anchor',
+                                    'searchreplace visualblocks code fullscreen',
+                                    'insertdatetime media table paste code help wordcount'
+                                ],
+                                toolbar:
+                                    'undo redo | formatselect | bold italic backcolor | \
+                                    alignleft aligncenter alignright alignjustify | \
+                                    bullist numlist outdent indent | removeformat | help'
+                                }}
+                                onEditorChange={this.handleRequirementsChange.bind(this)}
+                            />
+                            {/* <textarea type="text" rows="5" className="form-control" name="requirements" value={this.state.requirements} placeholder="Experience with Java, C++, or other programming languages" onChange={this.handleInputChange.bind(this)} required></textarea> */}
                         </div>
                         <div className="row">
                             <div className="col">
@@ -291,8 +360,9 @@ class EditListing extends React.Component{
                                 Publish Internship
                             </label>
                         </div>
-                        <h3>(Payment Processing Goes Here)</h3>
-                        <input type="submit" className={ this.state.published ? 'btn btn-success' : 'btn btn-secondary' } value={ this.state.published ? this.state.edit ? 'Save Changes' : 'Publish Internship' : 'Save Changes' }></input>
+                        { this.state.paid ? <h5 className="text-success">Payment Complete</h5> : paymentForm }
+                        { !this.state.edit && this.state.paymentID ? submitButton : '' }
+                        { this.state.edit ? submitButton : '' }
                     </form>
                 </div>
             );
@@ -300,4 +370,11 @@ class EditListing extends React.Component{
     }
 }
 
-export default EditListing;
+function mapStateToProps(state) {
+	console.log("State Auth 2: " + JSON.stringify(state.auth));
+	return {
+		auth: state.auth
+	};
+}
+
+export default connect(mapStateToProps)(EditListing);

@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import config from '../config';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
+import ReactHtmlParser from 'react-html-parser'; 
+
 
 class ViewListing extends React.Component {
 
@@ -128,13 +130,13 @@ class ViewListing extends React.Component {
 
                 <div className = "row" style={ { margin: 20 + 'px' }}>
                     <h5 className= "text-left w-25">Description: </h5>     
-                    <p className="col text-left">{this.state.description}</p>
+                    <div className="col text-left"> { ReactHtmlParser (this.state.description) } </div>
                 </div>
                 <hr></hr>
 
                 <div className="row" style={ { margin: 20 + 'px' }}>
                     <h5 className= "text-left w-25">Requirements: </h5>
-                    <p className= "col text-left">{this.state.requirements}</p>.
+                    <div className="col text-left"> { ReactHtmlParser (this.state.requirements) } </div>
                 </div>
                 <hr></hr>
 

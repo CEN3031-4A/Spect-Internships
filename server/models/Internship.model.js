@@ -13,6 +13,7 @@ var InternshipSchema = new Schema({
   requirements: {type: String, required: true},
   company: {type: Schema.ObjectId, required: false},
   market: {type: Schema.ObjectId, required: false},
+  payment: { type: Schema.ObjectId, required: true },
   compensation: {type: String, required: true},
   industry: {type: String, required: true},
   duration: {type: String, required: true},
