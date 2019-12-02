@@ -10,4 +10,10 @@ router.route('/:id')
   .get(businessProfileRouter.findOne)
   .put(businessProfileRouter.update);
 
+router.route('/:id/listing')
+  .get(businessProfileRouter.findListingByBusiness);
+
+router.route('/listing')
+  .get(businessProfileRouter.list);
+
   module.exports = router; 

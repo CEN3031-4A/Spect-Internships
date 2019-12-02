@@ -16,7 +16,13 @@ class ViewBusinessProfile extends React.Component{
                 address: '',
                 description: '',
                 website: '',
-                email: ''
+                email: '',
+
+            // Listing Information
+                L_title: '',
+                L_description: '',
+                L_applicationLink: '',
+                L_company: ''
         };
         this.loadBusinessProfile();
     }
@@ -35,13 +41,42 @@ class ViewBusinessProfile extends React.Component{
                     website: listing.website,
                     email: listing.email,
                 });
+                this.loadListing();
             }else{
                 this.setState({
                     loading: false,
                     errorLoading: true
                 })
             }
+        }).catch(error => {
+            console.error(error);
+            this.setState({
+                loading: false,
+                errorLoading: true
+            })
+        });
+    }
 
+    loadListing(){
+        axios.get(config.apiURL + "businessProfile/" + this.state.view + "/listing/").then(results => {
+            console.log(results);
+            var listing = results.data
+            if(listing){
+                console.log(listing);
+                this.setState({
+                    loading: false,
+                    L_title: listing.title,
+                    L_description: listing.description,
+                    L_applicationLink: listing.applicationLink,
+                    L_company: listing.company
+                });
+            }else{
+                this.setState({
+                    loading: false,
+                    errorLoading: true
+                })
+            }
+            
         }).catch(error => {
             console.error(error);
             this.setState({
@@ -90,15 +125,15 @@ class ViewBusinessProfile extends React.Component{
                         </div>
                         <hr></hr>
                         <div className = "row" style={ { margin: 20 + 'px' }}>
-                            <h5 class= "text-left w-25">Website Link: </h5>     
-                            <t class = "col text-left">{this.state.website}</t>
-                        </div>
-                        <hr></hr>
-                        <div className = "row" style={ { margin: 20 + 'px' }}>
                             <h5 class= "text-left w-25">Contact E-mail: </h5>     
                             <t class = "col text-left">{this.state.email}</t>
                         </div>
                         <hr></hr>
+                        <div className= "bg-transparent text-center">
+                            <a href = {this.state.website} target = '_BLANK' className = 'btn btn-primary'>
+                            Visit Webpage
+                            </a>
+                        </div>
                     </div>
                     <div className="container" style={{ marginBottom: 25 + 'px' }}>
                         <h2>Current Internships</h2>

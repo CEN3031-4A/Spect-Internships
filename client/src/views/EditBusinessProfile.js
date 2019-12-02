@@ -195,7 +195,7 @@ class EditBusinessProfile extends React.Component {
 						<div className="form-group">
 							<label htmlFor="website">Business Website</label>
 							<input
-								type="text"
+								type="url"
 								className="form-control"
 								name="website"
 								value={this.state.website}
