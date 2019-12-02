@@ -39,7 +39,6 @@ class AllListings extends React.Component {
                     errorLoading: true
                 })
             }
-
         }).catch(error => {
             console.error(error);
             this.setState({
