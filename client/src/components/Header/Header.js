@@ -56,18 +56,7 @@ class Header extends React.Component {
                 <a className="nav-link" href="/listing/add">Add</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/listing">View</a>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Profiles
-                </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="/studentProfile/edit/5dc8ce69d5d81243d0441210">Edit Student Profile</a>
-                <a className="dropdown-item" href="/businessProfile/edit/5dc8d230ec1fc933e494ca6b">Edit Business Profile</a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">Something else here</a>
-                </div>
+                <a className="nav-link" href={"/businessListings/view/" + this.props.auth.user.profile}>Listings</a>
               </li>
             </ul>
             <li className="nav-item dropdown navbar navbar-right">

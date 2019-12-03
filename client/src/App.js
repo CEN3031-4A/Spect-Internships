@@ -63,7 +63,7 @@ const App = () => {
 						<PrivateRoute exact path="/studentProfile/edit/:id" component={updateStudentProfile} />
 						<Route exact path="/listing/view/:id" component={ViewListing} />
 						<Route exact path="/listing" component={AllListings} />
-        <Route exact path="/businessListings/view/:id" component={businessListings} />
+        		<Route exact path="/businessListings/view/:id" component={businessListings} />
 						<Route component={NotFound} />
 					</Switch>
 					<ToastContainer
