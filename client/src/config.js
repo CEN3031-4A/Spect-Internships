@@ -1,5 +1,5 @@
 
-    var port = process.env.PORT || 3000;
+    var port = process.env.PORT;
 
 const config = {
     apiURL: "http://localhost:" + port + "/api/",
