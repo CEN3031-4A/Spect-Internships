@@ -77,7 +77,7 @@ class businessListings extends React.Component {
                     <div className="card-footer text-center"> 
                     <a href={'/listing/view/' + listing._id} className="btn btn-primary">View Internship</a> 
                    &nbsp; 
-                    <a href={'/listing/edit/' + listing._id} className="btn btn-primary">Edit Internship</a> 
+                    <a href={'/listing/edit/' + listing._id} className="btn btn-info">Edit Internship</a> 
                     
                    
                     </div> 
