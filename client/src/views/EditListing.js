@@ -63,6 +63,8 @@ class EditListing extends React.Component{
         });
     }
 
+    
+
     loadListing(){
         axios.get(config.apiURL + "Internship/" + this.state.edit).then(results => {
             console.log(results);
@@ -196,7 +198,12 @@ class EditListing extends React.Component{
       }
 
     render(){
-
+        if(this.props.auth.user){
+            if(!this.props.auth.user.business){
+                toast.error("Unauthorized");
+                return <Redirect to="/home"></Redirect>
+            }
+        }
         let button;
         let paymentForm;
         let submitButton = (<input type="submit" className={ this.state.published ? 'btn btn-success' : 'btn btn-secondary' } value={ this.state.published ? this.state.edit ? 'Save Changes' : 'Publish Internship' : 'Save Changes' }></input>);
@@ -360,7 +367,8 @@ class EditListing extends React.Component{
                                 Publish Internship
                             </label>
                         </div>
-                        { this.state.paid ? <h5 className="text-success">Payment Complete</h5> : paymentForm }
+                        <hr></hr>
+                        { this.state.paid ? <div><h5 className="text-success"><i className="fa fa-check"></i> Payment Complete</h5><p>Do not leave this page until you save changes.</p></div> : paymentForm }
                         { !this.state.edit && this.state.paymentID ? submitButton : '' }
                         { this.state.edit ? submitButton : '' }
                     </form>

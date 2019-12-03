@@ -2,21 +2,15 @@ import React from 'react';
 import logo from '../../assets/logo.svg';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import { logout } from '../../actions/auth';
 import {connect} from 'react-redux';
 
-function Home({logout}) {
+function Home() {
 	return (
 		<div className="App">
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
-				<p style={{ display: 'flex', flexDirection: 'column' }}>
-					<Link to="/login"> Login </Link>
-					<Link to="/login"> Signup </Link>
-					<Link to="/businessProfile/add"> Business edit </Link>
-					<Link to="/studentProfile/add"> student edit </Link>
-					<button onClick={logout}> Log out </button>
-				</p>
+				<h1>Welcome to Spect Internships</h1>
+				<p>This is a place where students can come to find meaningful Internships to enhance their resume while businesses can find the best applicants for their job.</p>
 				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer" />
 			</header>
 		</div>
@@ -24,6 +18,8 @@ function Home({logout}) {
 }
 
 const mapStateToProps = (state) => {
-
+	return {
+		auth: state.auth
+	  };
 };
-export default connect(mapStateToProps, {logout})( Home);
+export default connect(mapStateToProps)( Home);

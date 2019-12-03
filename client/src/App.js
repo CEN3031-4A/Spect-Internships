@@ -23,8 +23,9 @@ import setAuthToken from './utils/setAuthToken';
 
 import AllListings from './views/AllListings';
 import PrivateRoute from './components/routing/PrivateRoute';
-import BusinessPrivRoute from './components/routing/BusinessPrivRoute';
 import { connect } from 'react-redux';
+import Logout from './components/routing/Logout';
+import LogoutSuccess from './views/LogoutSuccess';
 
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
@@ -48,16 +49,17 @@ const App = () => {
 							<Redirect to="/Home" />
 						</Route>
 						<Route exact path="/signup" component={SignUp} />
+						<Route exact path="/logout" component={Logout} />
+						<Route exact path="/logout/success" component={LogoutSuccess} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/businessSignup" component={BusinessSignUp} />
-						<Route exact path="/listing/add" component={EditListing} />
-						<Route exact path="/listing/edit/:id" component={EditListing} />
-						{/* <BusinessPrivRoute exact path="/businessProfile/add" component={EditBusinessProfile} /> */}
-						<Route exact path="/businessProfile/add" component={EditBusinessProfile} />
-						<Route exact path="/businessProfile/edit/:id" component={EditBusinessProfile} />
-						<Route exact path="/studentProfile/add" component={updateStudentProfile} />
+						<PrivateRoute exact path="/listing/add" component={EditListing} />
+						<PrivateRoute exact path="/listing/edit/:id" component={EditListing} />
+						<PrivateRoute exact path="/businessProfile/add" component={EditBusinessProfile} />
+						<PrivateRoute exact path="/businessProfile/edit/:id" component={EditBusinessProfile} />
+						<PrivateRoute exact path="/studentProfile/add" component={updateStudentProfile} />
 						{/* <PrivateRoute exact path="/studentProfile/add" component={updateStudentProfile} /> */}
-						<Route exact path="/studentProfile/edit/:id" component={updateStudentProfile} />
+						<PrivateRoute exact path="/studentProfile/edit/:id" component={updateStudentProfile} />
 						<Route exact path="/listing/view/:id" component={ViewListing} />
 						<Route exact path="/listing" component={AllListings} />
 						<Route component={NotFound} />
