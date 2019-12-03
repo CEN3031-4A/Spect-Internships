@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
 import { PropTypes } from 'prop-types';
 import './auth.css';
+import { toast } from 'react-toastify';
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ login, isAuthenticated, auth}) => {
 	const [ formInfo, setFormInfo ] = useState({
 		email: '',
 		password: ''
@@ -16,9 +17,9 @@ const Login = ({ login, isAuthenticated }) => {
 		e.preventDefault();
 		login(email, password);
 	};
-
-	if (isAuthenticated) {
-		return <Redirect to="/Home" />;
+	if(isAuthenticated){
+		toast.success("Logged in");
+		return <Redirect to="/Home"></Redirect>
 	}
 	// localStorage.clear();
 	return (
@@ -64,7 +65,8 @@ Login.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-	isAuthenticated: state.auth.isAuthenticated
+	auth: state.auth,
+	isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { login })(Login);
