@@ -62,18 +62,26 @@ class businessListings extends React.Component {
                 <div>
                     <ul>
                     <div className="form-group">
-                    <label htmlFor="name">Click to Edit Internship</label>
+                    {/* <label htmlFor="name">Click to Edit Internship</label> */}
                     <br></br>
                         {this.state.listings.map((listing, index) => (
                     <div key={index} className ="card text-center" style={ { margin: 10 + 'px' }}>
-                    <div className="container">
-                         <h6> <a href={'/listing/edit/' + listing._id} class="text-dark">{listing.title}</a></h6>
+                    <div className="card-body">
+                         <h6> <a href={'/listing/edit/' + listing._id} className="text-dark">{listing.title}</a></h6>
                          <hr width="80%"></hr>
                            <Truncate width = {2080} ellipsis={<span>...</span>}>
                            {/* <h6 className="text-dark">Description: </h6> */}<h7 className="text-muted"> {listing.description.replace(/<[^>]+>/g,"")} </h7>
                             </Truncate>
                         </div>
-                    </div>
+                   
+                    <div className="card-footer text-center"> 
+                    <a href={'/listing/view/' + listing._id} className="btn btn-primary">View Internship</a> 
+                   &nbsp; 
+                    <a href={'/listing/edit/' + listing._id} className="btn btn-primary">Edit Internship</a> 
+                    
+                   
+                    </div> 
+                </div>
                         ))}
                         
                         </div>
@@ -89,4 +97,5 @@ class businessListings extends React.Component {
 
 
 }
+
 export default businessListings;
