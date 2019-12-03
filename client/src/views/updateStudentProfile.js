@@ -177,7 +177,8 @@ class updateStudentProfile extends React.Component{
                     <textarea type="textarea" rows="5" className="form-control" name="description" value={this.state.description} placeholder="Summary of your experiences and interests (ex. web development)" onChange={this.handleInputChange.bind(this)} required></textarea>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="skills">Top 3 Soft Skills </label>
+                    <label htmlFor="skills">Top 3 Soft Skills - Please take this  <a href="https://www.surveymonkey.com/r/spectSelfAssessment"> survey </a>FIRST to better determine your three strongest skills</label>
+                    {/* <a href="https://www.surveymonkey.com/r/spectSelfAssessment"> Survey</a> */}
                     <select className="form-control" name="skills1" value={this.state.skills1} onChange={this.handleInputChange.bind(this)} required>
                          <option disabled value>-- SELECT --</option>
                          <option>Leadership</option>
@@ -190,6 +191,7 @@ class updateStudentProfile extends React.Component{
                         <option>Teamwork</option>
                         <option>Global Awareness</option>
                         </select>
+                        <br></br>
                         <select className="form-control" name="skills2" value={this.state.skills2} onChange={this.handleInputChange.bind(this)} required>
                          <option disabled value>-- SELECT --</option>
                          <option>Leadership</option>
@@ -202,6 +204,7 @@ class updateStudentProfile extends React.Component{
                         <option>Teamwork</option>
                         <option>Global Awareness</option>
                         </select>
+                        <br></br>
                         <select className="form-control" name="skills3" value={this.state.skills3} onChange={this.handleInputChange.bind(this)} required>
                          <option disabled value>-- SELECT --</option>
                          <option>Leadership</option>
