@@ -14,6 +14,7 @@ class ViewListing extends React.Component {
             markets: [],
             errorLoading: false,
             loading: true,
+
             //Lisitng Information
                 title: '',
                 description: '',
@@ -23,10 +24,45 @@ class ViewListing extends React.Component {
                 published: false,
                 compensation: 'Paid',
                 duration: '1 Month',
-                applicationLink: ''
+                applicationLink: '',
+                company:'',
+
+            //Business Profile Information
+			    b_name: '',
+			    b_description: '',
         }
         this.loadListing();
     }
+
+    loadBusinessProfile() {
+        console.log(this.state.company);
+        axios
+			.get(config.apiURL + 'businessProfile/' + this.state.company)
+			.then((results) => {
+				console.log(results);
+				var listing = results.data;
+				if (listing) {
+					console.log(listing);
+					this.setState({
+						loading: false,
+						b_name: listing.name,
+						b_description: listing.description,
+					});
+				} else {
+					this.setState({
+						loading: false,
+						errorLoading: true
+					});
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+				this.setState({
+					loading: false,
+					errorLoading: true
+				});
+			});
+	}
 
     loadMarkets(){
         axios.get(config.apiURL + "Market/").then(results => {
@@ -70,9 +106,11 @@ class ViewListing extends React.Component {
                     published: listing.published,
                     compensation: listing.compensation,
                     duration: listing.duration,
-                    applicationLink: listing.applicationLink
+                    applicationLink: listing.applicationLink,
+                    company: listing.company
                 });
                 this.loadMarkets();
+                this.loadBusinessProfile();
             }else{
                 this.setState({
                     loading: false,
@@ -116,14 +154,15 @@ class ViewListing extends React.Component {
         }else{
 
             return (
+            <div>
 
-            <div className="container">
+            <div className="column" className ="container">
 
-                <h1>
-                    <i>
-                    {this.state.title}
-                    </i>
-                </h1>
+                <h2 class="pt-4 pb-3">       
+                    <a href =  {"/businessProfile/view/" + this.state.company}
+                    class="text-body">
+                        {this.state.b_name}
+                    </a> - {this.state.title}</h2>
                 <hr></hr>
 
                 <div style={ { margin: 10 + 'px' }}>  
@@ -166,7 +205,7 @@ class ViewListing extends React.Component {
 
                 </div>
 
-                <div className= "bg-transparent text-center">
+                <div className= "bg-transparent text-center pt-3 pb-3">
                 <a href = {this.state.applicationLink}
                 target = '_BLANK'
                 className = 'btn btn-primary'
@@ -174,6 +213,26 @@ class ViewListing extends React.Component {
                     Apply Now!
                 </a>
                 </div>
+
+                <hr></hr>
+            </div>
+
+            <div className="column container pb-5" >
+
+                <div className = "row" style={ { margin: 15 + 'px' }}>
+                    <h5 className="text-left w-25">About {this.state.b_name}:</h5>
+                    <p className="col text-left pr-5">{this.state.b_description}</p>
+
+                    <div className= "bg-transparent text-center">
+                    <a href = {"/businessProfile/view/" + this.state.company}
+                    className = 'btn btn-secondary'
+                    >
+                        Learn More
+                    </a>
+                    </div>
+                </div>
+
+            </div>
 
             </div>
             )
