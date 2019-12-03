@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import config from '../config';
 import Loader from 'react-loader-spinner'
+import Truncate from 'react-truncate';
 
 class ViewBusinessProfile extends React.Component{
     constructor(props){
@@ -10,6 +11,7 @@ class ViewBusinessProfile extends React.Component{
             view: this.props.match.params.id,
             errorLoading: false,
             loading: true,
+            listing: [],
 
             //Business Profile Information
                 name: '',
@@ -65,10 +67,7 @@ class ViewBusinessProfile extends React.Component{
                 console.log(listing);
                 this.setState({
                     loading: false,
-                    L_title: listing.title,
-                    L_description: listing.description,
-                    L_applicationLink: listing.applicationLink,
-                    L_company: listing.company
+                    listing: listing
                 });
             }else{
                 this.setState({
@@ -115,18 +114,18 @@ class ViewBusinessProfile extends React.Component{
                     <h1>{this.state.name}</h1>
                     <div style={ { margin: 10 + 'px' }}>  
                         <div className = "row" style={ { margin: 20 + 'px' }}>
-                            <h5 class= "text-left w-25">Description: </h5>     
-                            <t class = "col text-left">{this.state.description}</t>
+                            <h5 className = "text-left w-25">Description: </h5>     
+                            <p className = "col text-left">{this.state.description}</p>
                         </div>
                         <hr></hr>
                         <div className = "row" style={ { margin: 20 + 'px' }}>
-                            <h5 class= "text-left w-25">Address: </h5>     
-                            <t class = "col text-left">{this.state.address}</t>
+                            <h5 className= "text-left w-25">Address: </h5>     
+                            <p className = "col text-left">{this.state.address}</p>
                         </div>
                         <hr></hr>
                         <div className = "row" style={ { margin: 20 + 'px' }}>
-                            <h5 class= "text-left w-25">Contact E-mail: </h5>     
-                            <t class = "col text-left">{this.state.email}</t>
+                            <h5 className = "text-left w-25">Contact E-mail: </h5>     
+                            <p className = "col text-left">{this.state.email}</p>
                         </div>
                         <hr></hr>
                         <div className= "bg-transparent text-center">
@@ -137,9 +136,18 @@ class ViewBusinessProfile extends React.Component{
                     </div>
                     <div className="container" style={{ marginBottom: 25 + 'px' }}>
                         <h2>Current Internships</h2>
-                        {/*Add Business Listings after a business object is attached to them.*/}
                     </div>
-                </div>
+                        {this.state.listing.map((listing, index) => (
+                            <div key={index} className ="card" style={ { margin: 20 + 'px' }}>
+                                <div className="container">    
+                                    <h5><b><a href={'/listing/view/' + listing._id}> <font color="black">{listing.title}</font></a></b></h5>
+                                    <Truncate width = {2080} ellipsis={<span>...</span>}>
+                                    {listing.description.replace(/<[^>]+>/g,"")}
+                                    </Truncate>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
             );
         }
     }
