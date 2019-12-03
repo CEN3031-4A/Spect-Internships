@@ -67,7 +67,7 @@ class businessListings extends React.Component {
                         {this.state.listings.map((listing, index) => (
                     <div key={index} className ="card text-center" style={ { margin: 10 + 'px' }}>
                     <div className="card-body">
-                         <h6> <a href={'/listing/edit/' + listing._id} className="text-dark">{listing.title}</a></h6>
+                         <h5> <a href={'/listing/edit/' + listing._id} className="text-dark">{listing.title}</a></h5>
                          <hr width="80%"></hr>
                            <Truncate width = {2080} ellipsis={<span>...</span>}>
                            {/* <h6 className="text-dark">Description: </h6> */}<h7 className="text-muted"> {listing.description.replace(/<[^>]+>/g,"")} </h7>
