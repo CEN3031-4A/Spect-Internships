@@ -22,7 +22,7 @@ export const loadUser = () => async (dispatch) => {
 	}
 
 	try {
-		const res = await axios.get(require('../config').apiURL);
+		const res = await axios.get(require('../config').apiURL + 'auth');
 		console.log('user load!!!!!');
 		console.log(res.data);
 		dispatch({
@@ -48,7 +48,7 @@ export const signup = ({ name, email, password }) => async (dispatch) => {
 	const body = JSON.stringify({ name, email, password, business });
 
 	try {
-		const res = await axios.post(require('../config').apiURL, body, config);
+		const res = await axios.post(require('../config').apiURL + 'users', body, config);
 		dispatch({
 			type: REGISTER_SUCCESS,
 			payload: res.data
@@ -77,7 +77,7 @@ export const businessSignup = ({ name, email, password }) => async (dispatch) =>
 	const body = JSON.stringify({ name, email, password, business });
 
 	try {
-		const res = await axios.post(require('../config').apiURL, body, config);
+		const res = await axios.post(require('../config').apiURL + 'users', body, config);
 		dispatch({
 			type: BUSINESS_REGISTER_SUCCESS,
 			payload: res.data
@@ -105,7 +105,7 @@ export const login = (email, password) => async (dispatch) => {
 	const body = JSON.stringify({ email, password });
 
 	try {
-		const res = await axios.post(require('../config').apiURL, body, config);
+		const res = await axios.post(require('../config').apiURL + 'auth', body, config);
 		dispatch({
 			type: LOGIN_SUCCESS,
 			payload: res.data
