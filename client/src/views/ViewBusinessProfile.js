@@ -60,7 +60,7 @@ class ViewBusinessProfile extends React.Component{
     }
 
     loadListing(){
-        axios.get(config.apiURL + "businessProfile/" + this.state.view + "/listing/").then(results => {
+        axios.get(config.apiURL + "businessProfile/" + this.state.view + "/listings").then(results => {
             console.log(results);
             var listing = results.data
             if(listing){

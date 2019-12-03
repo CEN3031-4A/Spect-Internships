@@ -55,6 +55,7 @@ const App = () => {
 						<Route exact path="/logout/success" component={LogoutSuccess} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/businessSignup" component={BusinessSignUp} />
+						<Route exact path="/businessProfile/view/:id" component={ViewBusinessProfile} />
 						<PrivateRoute exact path="/listing/add" component={EditListing} />
 						<PrivateRoute exact path="/listing/edit/:id" component={EditListing} />
 						<PrivateRoute exact path="/businessProfile/add" component={EditBusinessProfile} />
