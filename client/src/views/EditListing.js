@@ -37,7 +37,10 @@ class EditListing extends React.Component{
                 compensation: 'Paid',
                 duration: '1 Month',
                 applicationLink: '',
-                paymentID: ''
+                paymentID: '',
+                skills1: '',
+                skills2: '',
+                skills3: ''
             
         };
         this.loadMarkets();
@@ -63,6 +66,8 @@ class EditListing extends React.Component{
         });
     }
 
+    
+
     loadListing(){
         axios.get(config.apiURL + "Internship/" + this.state.edit).then(results => {
             console.log(results);
@@ -78,7 +83,11 @@ class EditListing extends React.Component{
                     published: listing.published,
                     compensation: listing.compensation,
                     duration: listing.duration,
-                    applicationLink: listing.applicationLink
+                    applicationLink: listing.applicationLink,
+                    skills1: listing.skills[0],
+                    skills2: listing.skills[1],
+                    skills3: listing.skills[2],
+                    redirectTo: null 
                 });
                 if(this.state.markets.length > 0){
                     this.setState({market: listing.market});
@@ -133,6 +142,7 @@ class EditListing extends React.Component{
                         axios.delete(config.apiURL + "Internship/" + this.state.edit + "/delete").then(results => {
                             console.log("Successfully deleted.");
                             toast.success("Successfully deleted internship");
+                            this.setState({ redirectTo: '/businessListings/view/' + this.auth.user.profile })
                             // TO-DO: REDIRECT TO MY LISTINGS PAGE & SUCCESS TOAST
                         }).catch(erro => {
                             toast.error("Error deleting internship")
@@ -164,6 +174,7 @@ class EditListing extends React.Component{
             duration: this.state.duration,
             applicationLink: this.state.applicationLink,
             published: this.state.published,
+            skills: [this.state.skills1, this.state.skills2, this.state.skills3]
             // TO-DO: ADD LOGGED IN COMPANY ID INFORMATION
         }
         if(this.state.edit){
@@ -196,7 +207,15 @@ class EditListing extends React.Component{
       }
 
     render(){
-
+        if(this.props.auth.user){
+            if(!this.props.auth.user.business){
+                toast.error("Unauthorized");
+                return <Redirect to="/home"></Redirect>
+            }
+        }
+        if(this.state.redirectTo){
+            return <Redirect to={this.state.redirectTo}></Redirect>
+        }
         let button;
         let paymentForm;
         let submitButton = (<input type="submit" className={ this.state.published ? 'btn btn-success' : 'btn btn-secondary' } value={ this.state.published ? this.state.edit ? 'Save Changes' : 'Publish Internship' : 'Save Changes' }></input>);
@@ -354,13 +373,59 @@ class EditListing extends React.Component{
                             <label htmlFor="applicationLink">Application Link</label>
                             <input type="url" className="form-control" name="applicationLink" value={this.state.applicationLink} placeholder="Link to Apply to Position" onChange={this.handleInputChange.bind(this)} required></input>
                         </div>
+                        <div className="form-group">
+                            <label htmlFor="skills1">Soft Skill 1</label>
+                            <select className="form-control" name="skills1" value={this.state.skills1} onChange={this.handleInputChange.bind(this)} required>
+                                <option disabled value>-- SELECT 1 --</option>
+                                <option>Leadership</option>
+                                <option>Mindfulness</option>
+                                <option>Creativity</option>
+                                <option>Time Management</option>
+                                <option>Critical Thinking</option>
+                                <option>Communication</option>
+                                <option>Work Ethic</option>
+                                <option>Teamwork</option>
+                                <option>Global Awareness</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="skills2">Soft Skill 1</label>
+                            <select className="form-control" name="skills2" value={this.state.skills2} onChange={this.handleInputChange.bind(this)} required>
+                                <option disabled value>-- SELECT 1 --</option>
+                                <option>Leadership</option>
+                                <option>Mindfulness</option>
+                                <option>Creativity</option>
+                                <option>Time Management</option>
+                                <option>Critical Thinking</option>
+                                <option>Communication</option>
+                                <option>Work Ethic</option>
+                                <option>Teamwork</option>
+                                <option>Global Awareness</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="skills3">Soft Skill 1</label>
+                            <select className="form-control" name="skills3" value={this.state.skills3} onChange={this.handleInputChange.bind(this)} required>
+                                <option disabled value>-- SELECT 1 --</option>
+                                <option>Leadership</option>
+                                <option>Mindfulness</option>
+                                <option>Creativity</option>
+                                <option>Time Management</option>
+                                <option>Critical Thinking</option>
+                                <option>Communication</option>
+                                <option>Work Ethic</option>
+                                <option>Teamwork</option>
+                                <option>Global Awareness</option>
+                            </select>
+                        </div>
                         <div className="form-check">
                         <input className="form-check-input" type="checkbox" name="published" checked={this.state.published} value={this.state.published} onChange={this.handleInputChange.bind(this)}></input>
                             <label className="form-check-label" htmlFor="published">
                                 Publish Internship
                             </label>
                         </div>
-                        { this.state.paid ? <h5 className="text-success">Payment Complete</h5> : paymentForm }
+                        <hr></hr>
+                        { this.state.paid ? <div><h5 className="text-success"><i className="fa fa-check"></i> Payment Complete</h5><p>Do not leave this page until you save changes.</p></div> : paymentForm }
                         { !this.state.edit && this.state.paymentID ? submitButton : '' }
                         { this.state.edit ? submitButton : '' }
                     </form>

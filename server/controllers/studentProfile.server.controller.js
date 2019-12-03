@@ -47,6 +47,9 @@ exports.add = function(req, res){
         userAccount: req.body.userAccount,
         email: req.body.email,
         description: req.body.description,
+        skills1: req.body.skills1,
+        skills2: req.body.skills2,
+        skills3: req.body.skills3,
         removed: false
     });
 

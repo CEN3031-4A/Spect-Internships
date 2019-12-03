@@ -8,8 +8,5 @@ router.route('/')
 
 router.route("/update/:id")
   .put(marketRouter.update);
-
-router.route("/listing")
-    .get(marketRouter.list)
   
 module.exports = router;

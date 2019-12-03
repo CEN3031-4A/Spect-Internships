@@ -128,7 +128,6 @@ export const login = (email, password) => async (dispatch) => {
 // User Logout
 
 export const logout = () => (dispatch) => {
-	console.log("Attempting logout...");
 	dispatch({ type: LOGOUT });
 	toast.info("Logged Out");
 };
