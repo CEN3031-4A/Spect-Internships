@@ -20,12 +20,13 @@ import store from './store';
 import { loadUser } from './actions/auth';
 import { loadBusiness } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
-
+import businessListings from "./views/businessListings";
 import AllListings from './views/AllListings';
 import PrivateRoute from './components/routing/PrivateRoute';
 import { connect } from 'react-redux';
 import Logout from './components/routing/Logout';
 import LogoutSuccess from './views/LogoutSuccess';
+
 
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
@@ -62,6 +63,7 @@ const App = () => {
 						<PrivateRoute exact path="/studentProfile/edit/:id" component={updateStudentProfile} />
 						<Route exact path="/listing/view/:id" component={ViewListing} />
 						<Route exact path="/listing" component={AllListings} />
+        <Route exact path="/businessListings/view/:id" component={businessListings} />
 						<Route component={NotFound} />
 					</Switch>
 					<ToastContainer
@@ -80,5 +82,6 @@ const App = () => {
 		</Provider>
 	);
 };
+
 
 export default App;
