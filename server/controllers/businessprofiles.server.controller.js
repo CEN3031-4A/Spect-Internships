@@ -1,5 +1,4 @@
 const Business_Profile = require('../models/businessprofiles.server.model.js');
-const Internship = require('../models/Internship.model.js');
 
 exports.update = function(req, res) {
     Business_Profile.findOneAndUpdate({_id: req.params.id}, req.body, function(err, result){
@@ -30,18 +29,6 @@ exports.list = function(req, res) {
             if(err){
                 console.error("Error");
                 res.status(500).send({ message: "Error loading Business Profiles"});
-            }else{
-                res.send(results);
-            }
-        }
-    );
-};
-
-exports.findListingByBusiness = function(req, res) {
-    Internship.find({company:req.params.id}).exec(function(err, results){  //input business ID
-            if(err){
-                console.error("Error");
-                res.status(500).send({ message: "Error loading Internship"});
             }else{
                 res.send(results);
             }

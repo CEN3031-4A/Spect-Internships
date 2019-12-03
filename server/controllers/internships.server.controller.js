@@ -1,4 +1,4 @@
-const Internship = require('../models/Internship.model.js');
+const Internship = require('../models/internship.model.js');
 
 exports.update = function(req, res) {
     Internship.findOneAndUpdate({_id: req.params.id}, req.body, function(err, result){

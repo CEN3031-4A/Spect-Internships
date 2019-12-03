@@ -31,16 +31,12 @@ const SignUp = ({ setAlert, businessSignup, isBusinessAuthenticated }) => {
 	return (
 		<Fragment>
 			<div className="login-section">
-				<div style={{textAlign: 'center', color: 'white', paddingTop: '30px'}}>
-					<h1>Register your Company</h1>
-					<h5 style={{textAlign: 'center'}} textAlign="center">Register now to post Internships for interested Students</h5>
-				</div>
 				<div className="login-page">
 					<div className="form">
 						<form onSubmit={(e) => onSubmit(e)}>
 							<input
 								type="text"
-								placeholder=" Your Name"
+								placeholder=" Company Name"
 								name="name"
 								value={name}
 								onChange={(e) => onChange(e)}

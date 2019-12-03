@@ -22,10 +22,6 @@ class updateStudentProfile extends React.Component{
                 name: '',
                 address: '',
                 email: '',
-                description: '',
-                skills1: '',
-                skills2: '',
-                skills3: '',
 
 
         };
@@ -50,10 +46,7 @@ class updateStudentProfile extends React.Component{
                     name: listing.name,
                     address: listing.address,         
                     email: listing.email,
-                    description: listing.description,
-                    skills1: listing.skills1,
-                    skills2: listing.skills2,
-                    skills3: listing.skills3
+                    description: listing.description
                 });
             }else{
                 this.setState({
@@ -89,20 +82,17 @@ class updateStudentProfile extends React.Component{
             address: this.state.address,
             email: this.state.email,
             useraccount: this.state.useraccount,
-            description: this.state.description,
-            skills1: this.state.skills1,
-            skills2: this.state.skills2,
-            skills3: this.state.skills3
+            description: this.state.description
         }
         console.log(student_profile);
 
         if(this.state.edit){
             axios.put(config.apiURL + "studentProfile/" + this.state.edit, student_profile).then(result => {
                 console.log("Successfully Edited Student Profile in Database: " + result);
-                toast.success("Successfully Updated Profile");
+                toast.success("Successfully edited profile");
             }).catch(error => {
-                console.error("Error Updating Student Profile in Database: " + error);
-                toast.error("Error Updating Profile");
+                console.error("Error Editing Student Profile in Database: " + error);
+                toast.error("Error Editing Profile");
             });
             
         }else{
@@ -177,61 +167,9 @@ class updateStudentProfile extends React.Component{
                     <textarea type="textarea" rows="5" className="form-control" name="description" value={this.state.description} placeholder="Summary of your experiences and interests (ex. web development)" onChange={this.handleInputChange.bind(this)} required></textarea>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="skills">Top 3 Soft Skills - Please take this  <a href="https://www.surveymonkey.com/r/spectSelfAssessment"> survey </a>FIRST to better determine your three strongest skills</label>
-                    {/* <a href="https://www.surveymonkey.com/r/spectSelfAssessment"> Survey</a> */}
-                    <select className="form-control" name="skills1" value={this.state.skills1} onChange={this.handleInputChange.bind(this)} required>
-                         <option disabled value>-- SELECT --</option>
-                         <option>Leadership</option>
-                        <option>Minedfulness</option>
-                        <option>Creativity</option>
-                        <option>Time Management</option>
-                        <option>Critical Thinking</option>
-                        <option>Communication</option>
-                        <option>Work Ethic</option>
-                        <option>Teamwork</option>
-                        <option>Global Awareness</option>
-                        </select>
-                        <br></br>
-                        <select className="form-control" name="skills2" value={this.state.skills2} onChange={this.handleInputChange.bind(this)} required>
-                         <option disabled value>-- SELECT --</option>
-                         <option>Leadership</option>
-                        <option>Minedfulness</option>
-                        <option>Creativity</option>
-                        <option>Time Management</option>
-                        <option>Critical Thinking</option>
-                        <option>Communication</option>
-                        <option>Work Ethic</option>
-                        <option>Teamwork</option>
-                        <option>Global Awareness</option>
-                        </select>
-                        <br></br>
-                        <select className="form-control" name="skills3" value={this.state.skills3} onChange={this.handleInputChange.bind(this)} required>
-                         <option disabled value>-- SELECT --</option>
-                         <option>Leadership</option>
-                        <option>Minedfulness</option>
-                        <option>Creativity</option>
-                        <option>Time Management</option>
-                        <option>Critical Thinking</option>
-                        <option>Communication</option>
-                        <option>Work Ethic</option>
-                        <option>Teamwork</option>
-                        <option>Global Awareness</option>
-                        </select>
-                        </div>
-        
-                    {/* <label htmlFor="skills">Top 3 Soft Skills (ctrl shift to select multiple)</label>
-                        <select multiple class="form-control" id="skills" value={this.state.skills} onChange={this.handleInputChange.bind(this)} >
-                        <option>Leadership</option>
-                        <option>Minedfulness</option>
-                        <option>Creativity</option>
-                        <option>Time Management</option>
-                        <option>Critical Thinking</option>
-                        <option>Communication</option>
-                        <option>Work Ethic</option>
-                        <option>Teamwork</option>
-                        <option>Global Awareness</option>
-                        </select>
-                </div> */}
+                    <label htmlFor="skills">9 Core Skills</label>
+                    <input type="text" className="form-control" name="skills" value={this.state.website} placeholder="1-9" onChange={this.handleInputChange.bind(this)}></input>
+                </div>
                 <button type="submit" className="btn btn-primary"> Submit Changes </button>
             </form>
         </div>

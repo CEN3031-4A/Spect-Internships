@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import config from '../config';
 import Loader from 'react-loader-spinner';
 import { toast } from 'react-toastify';
-import { withRouter, Redirect } from 'react-router-dom';
 
 
 class EditBusinessProfile extends React.Component {
@@ -20,10 +19,8 @@ class EditBusinessProfile extends React.Component {
 			address: '',
 			description: '',
 			website: '',
-			email: '',
-			redirectToEdit: false
+			email: ''
 		};
-
 
 		//Check if Edit or Add
 		if (this.state.edit) {
@@ -107,9 +104,7 @@ class EditBusinessProfile extends React.Component {
 				.then((result) => {
 					// TO-DO: Added Success Popup
 					console.log('Successfully Added Business Profile to Database: ' + JSON.stringify(result));
-					toast.success("Successfully Added Profile");
 					this.linkProfile(result.data.result._id);
-					this.setState({redirectToEdit: true });
 				})
 				.catch((error) => {
 					console.error('Error Adding Business Profile to Database: ' + JSON.stringify(error));
@@ -134,17 +129,6 @@ class EditBusinessProfile extends React.Component {
 	}
 
 	render() {
-		if(this.state.auth){
-			console.log("Auth");
-			if(!this.state.edit && this.auth.user.profile){
-				this.setState({redirectToEdit: true });
-			}
-		}
-		console.log("Render");
-
-		if(this.state.redirectToEdit){
-			return (<Redirect to={ '/businessProfile/edit/' + this.props.auth.user.profile}></Redirect>)
-		}
 		if (this.state.errorLoading && !this.state.loading) {
 			return (
 				<div className="container">
@@ -247,4 +231,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(withRouter(EditBusinessProfile));
+export default connect(mapStateToProps)(EditBusinessProfile);

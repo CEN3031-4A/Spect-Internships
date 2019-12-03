@@ -158,9 +158,9 @@ class ViewListing extends React.Component {
 
             <div className="column" className ="container">
 
-                <h2 className="pt-4 pb-3">       
+                <h2 class="pt-4 pb-3">       
                     <a href =  {"/businessProfile/view/" + this.state.company}
-                    className="text-body">
+                    class="text-body">
                         {this.state.b_name}
                     </a> - {this.state.title}</h2>
                 <hr></hr>

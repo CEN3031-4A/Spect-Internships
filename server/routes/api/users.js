@@ -5,7 +5,7 @@ const User = require('../../models/User');
 const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const JsonSecret = process.env.JSONSecret || require('../../config/config').JSONSecret;
+const JsonSecret = require('../../config/config').JSONSecret;
 
 router.put('/',
 	async (req, res) => {
