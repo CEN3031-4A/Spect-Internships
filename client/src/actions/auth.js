@@ -22,7 +22,7 @@ export const loadUser = () => async (dispatch) => {
 	}
 
 	try {
-		const res = await axios.get('http://localhost:5008/api/auth');
+		const res = await axios.get(require('../config').apiURL);
 		console.log('user load!!!!!');
 		console.log(res.data);
 		dispatch({
