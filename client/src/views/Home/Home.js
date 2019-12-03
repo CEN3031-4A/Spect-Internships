@@ -8,9 +8,12 @@ function Home() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<h1>Welcome to Spect Internships</h1>
-				<p>This is a place where students can come to find meaningful Internships to enhance their resume while businesses can find the best applicants for their job.</p>
+				<img src="https://149360317.v2.pressablecdn.com/wp-content/uploads/2019/11/spect-white-logo-scaled.png" className="App-logo" alt="logo" />
+				<hr></hr>
+				<p style={{ display: 'flex', flexDirection: 'column' }}>
+					<div className="text-white text-center">Connecting Students and Employers on Soft Skills that Matter</div>
+					
+				</p>
 				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer" />
 			</header>
 		</div>
