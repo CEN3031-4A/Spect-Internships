@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import config from '../config';
 import './AllListings.css';
+import  Truncate from 'react-truncate';
 
 
 class AllListings extends React.Component {
@@ -14,9 +15,11 @@ class AllListings extends React.Component {
             markets: [],
             errorLoading: false,
             loading: true,
-            listings: []
+            listings: [],
+            market: 'ALL MARKETS'
         };
         this.loadListing();
+        this.loadMarkets(); 
     }
 
     loadListing() {
@@ -48,29 +51,76 @@ class AllListings extends React.Component {
         });
     }
 
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log("Name: " + name + " Value: " + value);
+        this.setState({
+            [name]: value
+        });
+    }
+
+    loadMarkets(){
+        axios.get(config.apiURL + "Market/").then(results => {
+            console.log(results);
+            this.setState({
+                markets: results.data,
+                loading: false,
+            });
+        }).catch(error => {
+            console.error(error);
+            this.setState({
+                loading: false,
+                errorLoading: true
+            })
+        });
+    }
+
     render() {
         if(!this.state.loading){
             return (
                 <div className="container" >
-             
-                    
-                        {this.state.listings.map((listing, index) => (
 
-                        <div key={listing._id} className="card text-center" style={{width: "100%"}}>
-                           
-                                <li className="list-group-item" key={index}>
-                                    <a href={'/listing/view/' + listing._id}>
-                                    <h5 className="card-title" >
-                                    {listing.title}
-                                    </h5>
-                                    <ul className="list-group list-group-flush">
-                                    {listing.description}
-                                    </ul>
-                                    </a>
-                                </li>
-                            </div>
-                       
-                        ))}
+                   <div className="form-group">
+                        <label htmlFor="market">Filter Market</label>
+                                <select className="form-control" name="market" value={this.state.market} onChange={this.handleInputChange.bind(this)} required >
+                                    <option value="ALL MARKETS" key="ALL MARKETS">ALL MARKETS</option>
+                                        {
+                                            this.state.markets.map(market => {
+                                                
+                                                return (<option value={market._id} key={market._id}>{ market.name} </option>);  
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                     
+                   
+                        { this.state.listings.map((listing, index) => {
+                            console.log(listing.market + " " + this.state.market);
+                            if(listing.market===this.state.market || this.state.market === "ALL MARKETS"){
+                                return(
+                                    <div key={listing._id} className="card text-center" style={{width: "100%"}}>
+                                    
+                                            <li className="list-group-item" key={index}>
+                                                <a href={'/listing/view/' + listing._id}>
+                                                <h5 className="card-title" >
+                                                {listing.title}
+                                                </h5>
+                                                <ul className="list-group list-group-flush">
+                                                    <Truncate width={2080} ellipsis={<span>...</span>}>
+                                                {listing.description}
+                                                </Truncate>
+                                                </ul>
+                                                </a>
+                                            </li>
+                                        </div>
+                                
+                                    )
+                            }else{
+                                return null;
+                            }
+                        })} 
                   
                 <nav aria-label="Page navigation example">
                     <ul className="pagination">
@@ -82,6 +132,7 @@ class AllListings extends React.Component {
                     </ul>
                 </nav>
             </div>
+          
 
             );
         }else{
