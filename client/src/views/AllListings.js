@@ -60,9 +60,9 @@ class AllListings extends React.Component {
                            
                                 <li className="list-group-item" key={index}>
                                     <a href={'/listing/view/' + listing._id}>
-                                    <div className="card-header" >
+                                    <h5 className="card-title" >
                                     {listing.title}
-                                    </div>
+                                    </h5>
                                     <ul className="list-group list-group-flush">
                                     {listing.description}
                                     </ul>
