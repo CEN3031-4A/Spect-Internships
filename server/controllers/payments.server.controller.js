@@ -1,16 +1,16 @@
 const Payment = require('../models/payment.model.js');
-const config = require("../config/config");
-const stripe = require("stripe")(process.env.stripeSecret || config.stripeSecret);
+
+const stripe = require("stripe")(process.env.stripeSecret);
 
 
 exports.charge = function(req, res){
 
     try {
         var payment = new Payment({
-            amount: process.env.listingPrice || config.listingPrice
+            amount: process.env.listingPrice
           });
         let {status} = stripe.charges.create({
-          amount: config.listingPrice,
+          amount: process.env.listingPrice,
           currency: "usd",
           source: req.body.token
         });
