@@ -7,7 +7,7 @@ const path = require('path'),
     bodyParser = require('body-parser'),
    internshipRouter = require('../routes/internships.server.routes');
     marketRouter = require('../routes/markets.server.routes');
-    businessProfileRouter = require('../routes/businessProfiles.server.routes');
+    businessProfileRouter = require('../routes/businessprofiles.server.routes');
     studentProfileRouter = require('../routes/studentProfile.server.routes');
 
 
