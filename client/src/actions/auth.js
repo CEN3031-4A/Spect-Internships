@@ -48,7 +48,7 @@ export const signup = ({ name, email, password }) => async (dispatch) => {
 	const body = JSON.stringify({ name, email, password, business });
 
 	try {
-		const res = await axios.post('http://localhost:5008/api/users', body, config);
+		const res = await axios.post(require('../config').apiURL, body, config);
 		dispatch({
 			type: REGISTER_SUCCESS,
 			payload: res.data
@@ -77,7 +77,7 @@ export const businessSignup = ({ name, email, password }) => async (dispatch) =>
 	const body = JSON.stringify({ name, email, password, business });
 
 	try {
-		const res = await axios.post('http://localhost:5008/api/users', body, config);
+		const res = await axios.post(require('../config').apiURL, body, config);
 		dispatch({
 			type: BUSINESS_REGISTER_SUCCESS,
 			payload: res.data
@@ -105,7 +105,7 @@ export const login = (email, password) => async (dispatch) => {
 	const body = JSON.stringify({ email, password });
 
 	try {
-		const res = await axios.post('http://localhost:5008/api/auth', body, config);
+		const res = await axios.post(require('../config').apiURL, body, config);
 		dispatch({
 			type: LOGIN_SUCCESS,
 			payload: res.data
