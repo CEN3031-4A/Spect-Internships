@@ -9,13 +9,11 @@ function Home({logout}) {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
+				<img src="https://149360317.v2.pressablecdn.com/wp-content/uploads/2019/11/spect-white-logo-scaled.png" className="App-logo" alt="logo" />
+				<hr></hr>
 				<p style={{ display: 'flex', flexDirection: 'column' }}>
-					<Link to="/login"> Login </Link>
-					<Link to="/login"> Signup </Link>
-					<Link to="/businessProfile/add"> Business edit </Link>
-					<Link to="/studentProfile/add"> student edit </Link>
-					<button onClick={logout}> Log out </button>
+					<div className="text-white text-center">Connecting Students and Employers on Soft Skills that Matter</div>
+					
 				</p>
 				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer" />
 			</header>
