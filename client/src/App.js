@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import updateStudentProfile from './views/updateStudentProfile';
 import EditBusinessProfile from './views/EditBusinessProfile';
+import ViewBusinessProfile from './views/ViewBusinessProfile';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Alert from './components/layout/Alert';
