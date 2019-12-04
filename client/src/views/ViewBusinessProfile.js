@@ -110,7 +110,7 @@ class ViewBusinessProfile extends React.Component{
             );
         }else{
             return (
-                <div className="container" style={{ marginBottom: 25 + 'px' }}>
+                <div className="container" style={{ margin: 25 + 'px' }}>
                     <h1>{this.state.name}</h1>
                     <div style={ { margin: 10 + 'px' }}>  
                         <div className = "row" style={ { margin: 20 + 'px' }}>
@@ -138,7 +138,7 @@ class ViewBusinessProfile extends React.Component{
                         <h2>Current Internships</h2>
                     </div>
                         {this.state.listing.map((listing, index) => (
-                            <div key={index} className ="card" style={ { margin: 20 + 'px' }}>
+                            <div key={index} className ="card" style={ { padding: 20 + 'px', margin: 20 + 'px' }}>
                                 <div className="container">    
                                     <h5><b><a href={'/listing/view/' + listing._id}> <font color="black">{listing.title}</font></a></b></h5>
                                     <Truncate width = {2080} ellipsis={<span>...</span>}>

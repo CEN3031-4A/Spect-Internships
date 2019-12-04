@@ -3,6 +3,7 @@ import axios from 'axios';
 import config from '../config';
 import Loader from 'react-loader-spinner';
 import ReactHtmlParser from 'react-html-parser'; 
+import {connect} from 'react-redux';
 
 
 class ViewListing extends React.Component {
@@ -26,6 +27,7 @@ class ViewListing extends React.Component {
                 duration: '1 Month',
                 applicationLink: '',
                 company:'',
+                skills: [],
 
             //Business Profile Information
 			    b_name: '',
@@ -107,7 +109,8 @@ class ViewListing extends React.Component {
                     compensation: listing.compensation,
                     duration: listing.duration,
                     applicationLink: listing.applicationLink,
-                    company: listing.company
+                    company: listing.company,
+                    skills: listing.skills
                 });
                 this.loadMarkets();
                 this.loadBusinessProfile();
@@ -152,7 +155,25 @@ class ViewListing extends React.Component {
             </div>
             );
         }else{
+            var skills = "";
+            this.state.skills.forEach(skill => {
+                skills = skills + skill + ", "
+            });
+            skills = skills.substring(0, skills.length - 2);
 
+            let applyButton = (<p style={{textAlign: 'center'}}><b>Please register or login to view application</b></p>);
+            if(this.props.auth){
+                if(this.props.auth.isAuthenticated){
+                    applyButton = (<div className= "bg-transparent text-center pt-3 pb-3">
+                        <a href = {this.state.applicationLink}
+                        target = '_BLANK'
+                        className = 'btn btn-primary'
+                        >
+                            Apply Now!
+                        </a>
+                    </div>);
+                }
+            }
             return (
             <div>
 
@@ -203,16 +224,17 @@ class ViewListing extends React.Component {
                 </div>
                 <hr></hr>
 
+                <div className = "row" style={ { margin: 20 + 'px' }}>
+                    <h5 className="text-left w-25">Preferred Soft Skills: </h5>
+                    <p className="col text-left">
+                        { skills }
+                    </p>
+                </div>
+                <hr></hr>
+
                 </div>
 
-                <div className= "bg-transparent text-center pt-3 pb-3">
-                <a href = {this.state.applicationLink}
-                target = '_BLANK'
-                className = 'btn btn-primary'
-                >
-                    Apply Now!
-                </a>
-                </div>
+                { applyButton }
 
                 <hr></hr>
             </div>
@@ -240,4 +262,10 @@ class ViewListing extends React.Component {
     }
 }
 
-export default ViewListing;
+function mapStateToProps(state) {
+	return {
+		auth: state.auth
+	};
+}
+
+export default connect(mapStateToProps)(ViewListing);

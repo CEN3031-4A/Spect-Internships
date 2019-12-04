@@ -107,9 +107,7 @@ class EditBusinessProfile extends React.Component {
 				.then((result) => {
 					// TO-DO: Added Success Popup
 					console.log('Successfully Added Business Profile to Database: ' + JSON.stringify(result));
-					toast.success("Successfully Added Profile");
 					this.linkProfile(result.data.result._id);
-					this.setState({redirectToEdit: true });
 				})
 				.catch((error) => {
 					console.error('Error Adding Business Profile to Database: ' + JSON.stringify(error));
@@ -128,7 +126,6 @@ class EditBusinessProfile extends React.Component {
 				})
 				.catch((error) => {
 					console.error('Error Editing User Profile in Database: ' + error);
-					toast.error("Error Adding Profile");
 				});
 
 	}

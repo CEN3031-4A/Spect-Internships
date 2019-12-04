@@ -80,49 +80,53 @@ class AllListings extends React.Component {
     render() {
         if(!this.state.loading){
             return (
-                <div className="container" >
-
-                   <div className="form-group">
-                        <label htmlFor="market">Filter Market</label>
+                <div className="container" style={{paddingTop: '30px', paddingBottom: '30px'}}>
+                    <div className="row">
+                        <div className="col-md-3">
+                            <div className="form-group">
+                                <label htmlFor="market">Filter Market</label>
                                 <select className="form-control" name="market" value={this.state.market} onChange={this.handleInputChange.bind(this)} required >
                                     <option value="ALL MARKETS" key="ALL MARKETS">ALL MARKETS</option>
                                         {
                                             this.state.markets.map(market => {
-                                                
-                                                return (<option value={market._id} key={market._id}>{ market.name} </option>);  
+                                                if(market.published){
+                                                    return (<option value={market._id} key={market._id}>{ market.name} </option>);  
+                                                }else{
+                                                    return '';
+                                                }
                                             })
                                         }
-                                    </select>
-                                </div>
-                     
-                   
-                        { this.state.listings.map((listing, index) => {
-                            console.log(listing.market + " " + this.state.market);
-                            if(listing.market===this.state.market || this.state.market === "ALL MARKETS"){
-                                return(
-                                    <div key={listing._id} className="card text-center" style={{width: "100%"}}>
-                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div className="col-md-9">
+                            { this.state.listings.map((listing, index) => {
+                                console.log(listing.market + " " + this.state.market);
+                                if(listing.market===this.state.market || this.state.market === "ALL MARKETS"){
+                                    return(
+                                        <div key={listing._id} className="card text-center" style={{width: "90%", marginBottom: '15px'}}>                                    
                                             <li className="list-group-item" key={index}>
                                                 <a href={'/listing/view/' + listing._id}>
-                                                <h5 className="card-title" >
-                                                {listing.title}
-                                                </h5>
+                                                    <h5 className="card-title" >
+                                                        {listing.title}
+                                                    </h5>
+                                                </a>
                                                 <ul className="list-group list-group-flush">
                                                     <Truncate width={2080} ellipsis={<span>...</span>}>
                                                 {listing.description}
                                                 </Truncate>
                                                 </ul>
-                                                </a>
                                             </li>
                                         </div>
-                                
-                                    )
-                            }else{
-                                return null;
-                            }
-                        })} 
-                  
-                <nav aria-label="Page navigation example">
+                                    
+                                        )
+                                }else{
+                                    return null;
+                                }
+                            })} 
+                        </div>
+                    </div>
+                {/* <nav aria-label="Page navigation example">
                     <ul className="pagination">
                         <li className="page-item"><a className="page-link" href="#">Previous</a></li>
                         <li className="page-item"><a className="page-link" href="#">1</a></li>
@@ -130,7 +134,7 @@ class AllListings extends React.Component {
                         <li className="page-item"><a className="page-link" href="#">3</a></li>
                         <li className="page-item"><a className="page-link" href="#">Next</a></li>
                     </ul>
-                </nav>
+                </nav> */}
             </div>
           
 
