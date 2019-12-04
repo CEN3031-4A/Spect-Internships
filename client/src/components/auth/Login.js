@@ -26,6 +26,12 @@ const Login = ({ login, isAuthenticated, auth}) => {
 				}else{
 					return <Redirect to="/studentProfile/add"></Redirect>
 				}
+			}else{
+				if(auth.user.business){
+					return <Redirect to={"/businessListings/view/" + auth.user.profile}></Redirect>
+				}else{
+					return <Redirect to="/listing"></Redirect>
+				}
 			}
 
 		}
