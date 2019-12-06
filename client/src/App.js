@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import updateStudentProfile from './views/updateStudentProfile';
 import EditBusinessProfile from './views/EditBusinessProfile';
+import ViewBusinessProfile from './views/ViewBusinessProfile';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Alert from './components/layout/Alert';
@@ -54,6 +55,7 @@ const App = () => {
 						<Route exact path="/logout/success" component={LogoutSuccess} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/businessSignup" component={BusinessSignUp} />
+						<Route exact path="/businessProfile/view/:id" component={ViewBusinessProfile} />
 						<PrivateRoute exact path="/listing/add" component={EditListing} />
 						<PrivateRoute exact path="/listing/edit/:id" component={EditListing} />
 						<PrivateRoute exact path="/businessProfile/add" component={EditBusinessProfile} />
@@ -63,7 +65,7 @@ const App = () => {
 						<PrivateRoute exact path="/studentProfile/edit/:id" component={updateStudentProfile} />
 						<Route exact path="/listing/view/:id" component={ViewListing} />
 						<Route exact path="/listing" component={AllListings} />
-        <Route exact path="/businessListings/view/:id" component={businessListings} />
+        		<Route exact path="/businessListings/view/:id" component={businessListings} />
 						<Route component={NotFound} />
 					</Switch>
 					<ToastContainer

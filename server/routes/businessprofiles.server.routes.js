@@ -16,5 +16,4 @@ router.route('/:id')
   router.route('/listing')
     .get(businessProfileRouter.list);
 
-  module.exports = router;
-
+  module.exports = router; 

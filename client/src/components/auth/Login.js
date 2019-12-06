@@ -19,7 +19,22 @@ const Login = ({ login, isAuthenticated, auth}) => {
 	};
 	if(isAuthenticated){
 		toast.success("Logged in");
-		return <Redirect to="/Home"></Redirect>
+		if(auth.user){
+			if(!auth.user.profile){
+				if(auth.user.business){
+					return <Redirect to="/businessProfile/add"></Redirect>
+				}else{
+					return <Redirect to="/studentProfile/add"></Redirect>
+				}
+			}else{
+				if(auth.user.business){
+					return <Redirect to={"/businessListings/view/" + auth.user.profile}></Redirect>
+				}else{
+					return <Redirect to="/listing"></Redirect>
+				}
+			}
+
+		}
 	}
 	// localStorage.clear();
 	return (

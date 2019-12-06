@@ -276,6 +276,7 @@ class EditListing extends React.Component{
                             <label htmlFor="description">Position Description</label>
                             <Editor
                                 value={this.state.description}
+                                apiKey={config.tinyKey}
                                 //initialValue="<p>This is the initial content of the editor</p>"
                                 init={{
                                 height: 300,
@@ -389,7 +390,7 @@ class EditListing extends React.Component{
                             </select>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="skills2">Soft Skill 1</label>
+                            <label htmlFor="skills2">Soft Skill 2</label>
                             <select className="form-control" name="skills2" value={this.state.skills2} onChange={this.handleInputChange.bind(this)} required>
                                 <option disabled value>-- SELECT 1 --</option>
                                 <option>Leadership</option>
@@ -404,7 +405,7 @@ class EditListing extends React.Component{
                             </select>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="skills3">Soft Skill 1</label>
+                            <label htmlFor="skills3">Soft Skill 3</label>
                             <select className="form-control" name="skills3" value={this.state.skills3} onChange={this.handleInputChange.bind(this)} required>
                                 <option disabled value>-- SELECT 1 --</option>
                                 <option>Leadership</option>
@@ -436,7 +437,6 @@ class EditListing extends React.Component{
 }
 
 function mapStateToProps(state) {
-	console.log("State Auth 2: " + JSON.stringify(state.auth));
 	return {
 		auth: state.auth
 	};

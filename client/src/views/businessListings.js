@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import  Truncate from 'react-truncate';
 import config from '../config';
 
 
@@ -54,17 +54,34 @@ class businessListings extends React.Component {
                 
                 <div className="container text-center">
                      
-                      <div class="jumbotron text-center">
-                      <h1>View Current Internship Listings</h1>
-                </div>
+                      {/* <div class="jumbotron text-center"> */}
+                      <h1>Current Internship Listings</h1>
+                {/* </div> */}
+                <hr></hr>
+                
                 <div>
                     <ul>
                     <div className="form-group">
-                    <label htmlFor="name">Click to Edit Internship</label>
+                    {/* <label htmlFor="name">Click to Edit Internship</label> */}
+                    <br></br>
                         {this.state.listings.map((listing, index) => (
-                    <div class="card">
-                            <a href={'/listing/edit/' + listing._id}>{listing.title}</a>
-                            </div>
+                    <div key={index} className ="card text-center" style={ { margin: 10 + 'px' }}>
+                    <div className="card-body">
+                         <h5 className="text-dark">{listing.title}</h5>
+                         <hr width="80%"></hr>
+                           <Truncate width = {2080} ellipsis={<span>...</span>}>
+                           {/* <h6 className="text-dark">Description: </h6> */}<h7 className="text-muted"> {listing.description.replace(/<[^>]+>/g,"")} </h7>
+                            </Truncate>
+                        </div>
+                   
+                    <div className="card-footer text-center"> 
+                    <a href={'/listing/view/' + listing._id} className="btn btn-primary">View Internship</a> 
+                   &nbsp; 
+                    <a href={'/listing/edit/' + listing._id} className="btn btn-info">Edit Internship</a> 
+                    
+                   
+                    </div> 
+                </div>
                         ))}
                         
                         </div>
@@ -80,4 +97,5 @@ class businessListings extends React.Component {
 
 
 }
+
 export default businessListings;

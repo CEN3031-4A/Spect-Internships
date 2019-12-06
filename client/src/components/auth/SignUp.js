@@ -32,8 +32,8 @@ const SignUp = ({ setAlert, signup, isAuthenticated }) => {
 		<Fragment>
 			<div className="login-section">
 			<div style={{textAlign: 'center', color: 'white', paddingTop: '30px'}}>
-					<h1>Register as a Students</h1>
-					<h5 style={{textAlign: 'center'}} textAlign="center">Register now to find Internships for you.</h5>
+					<h1>Register as a Student</h1>
+					<h5 style={{textAlign: 'center'}}>Register now to find Internships for you.</h5>
 			</div>
 			<div className="login-page">
 				<div className="form">

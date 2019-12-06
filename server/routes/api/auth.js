@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcryptjs');
-const JsonSecret = process.env.JSONSecret;
+const JsonSecret = require('../../config/config').JSONSecret;
 
 router.get('/', auth, async (req, res) => {
 	try {
