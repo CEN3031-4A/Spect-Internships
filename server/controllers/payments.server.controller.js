@@ -1,4 +1,4 @@
-const Payment = require('../models/payment.model.js');
+const Payment = require('../models/Payment.model.js');
 const config = require("../config/config");
 const stripe = require("stripe")(config.stripeSecret);
 
