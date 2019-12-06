@@ -11,7 +11,7 @@
 # Running Code
 1. Clone Code
 2. Server port can be edited in server/server.js
-3. Rename and Edit `client/src/example_config.js` and `server/config/example_config.js` to specifications (make sure API URL is set to correct port chosen)
+3. Rename both `client/src/example_config.js` and `server/config/example_config.js` to `config.js` and edit to specifications (make sure API URL is set to correct port chosen)
 4. Run "npm build" from the client folder
 5. Run "npm start" from the main folder
 
