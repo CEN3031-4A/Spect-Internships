@@ -4,8 +4,8 @@ const express = require('./config/express.js')
 // Use env port or default
 
 //const port = process.env.PORT || 5000;
-const port = 5008;
-
+//const port = 5008;
+const port = process.env.PORT;
 
 
 const app = express.init()
