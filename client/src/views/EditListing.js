@@ -276,6 +276,7 @@ class EditListing extends React.Component{
                             <label htmlFor="description">Position Description</label>
                             <Editor
                                 value={this.state.description}
+                                apiKey={config.tinyKey}
                                 //initialValue="<p>This is the initial content of the editor</p>"
                                 init={{
                                 height: 300,
