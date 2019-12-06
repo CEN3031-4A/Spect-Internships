@@ -1,5 +1,5 @@
 const Business_Profile = require('../models/businessprofiles.server.model.js');
-const Internship = require('../models/internship.model.js');
+const Internship = require('../models/Internship.model.js');
 
 exports.update = function(req, res) {
     Business_Profile.findOneAndUpdate({_id: req.params.id}, req.body, function(err, result){
